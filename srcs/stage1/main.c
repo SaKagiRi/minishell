@@ -6,7 +6,7 @@
 /*   By: knakto <knakto@student.42bangkok.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 21:06:28 by knakto            #+#    #+#             */
-/*   Updated: 2025/03/30 21:07:19 by knakto           ###   ########.fr       */
+/*   Updated: 2025/03/31 00:09:58 by knakto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,6 @@
 
 int	main(void)
 {
-	ff_putstr("Hello world\n");
+	pnf("Hello world\n");
 	return (0);
 }
