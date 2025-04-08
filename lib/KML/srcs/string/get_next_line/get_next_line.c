@@ -6,7 +6,7 @@
 /*   By: knakto <knakto@student.42bangkok.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 14:52:13 by knakto            #+#    #+#             */
-/*   Updated: 2025/04/06 07:06:50 by knakto           ###   ########.fr       */
+/*   Updated: 2025/04/04 19:16:55 by knakto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,17 @@ static void	refactor_line(t_line **cache);
 
 char	*get_next_line(int fd)
 {
-	static t_line	*cache[10000];
+	static t_line	*cache = NULL;
 	char			*line;
 
 	line = NULL;
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	read_line(&cache[fd], fd);
-	if (!cache[fd])
+	read_line(&cache, fd);
+	if (!cache)
 		return (NULL);
-	create_line(cache[fd], &line);
-	refactor_line(&cache[fd]);
+	create_line(cache, &line);
+	refactor_line(&cache);
 	return (line);
 }
 

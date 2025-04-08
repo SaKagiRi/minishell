@@ -6,7 +6,7 @@ CC				= cc
 HEADER			= -I ./include #------------[FLAGS]
 CFLAGS		= $(DEBUG_FLAGS) $(W_FLAGS)
 DEBUG_FLAGS	= -g3
-W_FLAGS		= #-Wall -Wextra -Werror
+W_FLAGS		= -Wall -Wextra -Werror
 #------------[OBJECT_AND_SOURCE]
 SRC			= $(addprefix srcs/, $(FILE))
 OBJ			= $(SRC:%.c=%.o)
@@ -51,7 +51,6 @@ $(NAME): $(OBJ)
 %.o: %.c Makefile
 	@printf "\033[38;5;226;1m"
 	$(CC) $(CFLAGS) $(HEADER) -c $< -o $@
-	@sleep 0.02
 	@printf "\033[1A\033[2K"
 clean:
 	@rm -rf $(OBJ)

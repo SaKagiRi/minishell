@@ -13,7 +13,7 @@ LIBFT_FILE	= $(LIBFT_DIR)/kml.a
 SRC			= $(addprefix srcs/, $(FILE))
 OBJ			= $(SRC:.c=.o)
 #------------[ROOT_FILES]
-FILE		= $(MAIN) $(INIT)
+FILE		= $(MAIN) $(INIT) $(EXEC)
 #------------[SUBFILES]
 #------------[MAIN]
 MAIN		= $(addprefix $(MAIN_PATH)/, $(MAIN_FILE))
@@ -22,7 +22,11 @@ MAIN_FILE		= minishell.c get_t.c
 #------------[INIT_MINISHELL]
 INIT		= $(addprefix $(INIT_PATH)/, $(INIT_FILE))
 INIT_PATH		= init_minishell
-INIT_FILE		= init.c get_prompt.c
+INIT_FILE		= init.c
+#------------[EXECUTION]
+EXEC		= $(addprefix $(EXEC_PATH)/, $(EXEC_FILE))
+EXEC_PATH		= execution
+EXEC_FILE		= pipe.c
 #------------[PROCESS]
 all: lib $(NAME)
 $(NAME): $(OBJ) | $(BUILD_DIR)
@@ -31,6 +35,7 @@ $(NAME): $(OBJ) | $(BUILD_DIR)
 %.o: %.c Makefile
 	@printf "\033[38;5;226;1m"
 	$(CC) $(CFLAGS) -c $< -o $@ $(HEADER)
+	@printf "\033[1A\033[2K"
 lib:
 	@make -C $(LIBFT_DIR)
 clean:
@@ -39,6 +44,5 @@ clean:
 fclean: clean
 	@rm -rf $(NAME)
 	@make fclean -C $(LIBFT_DIR)
-	@printf "\033[1A\033[2K"
 re: fclean all
 .PHONY: all clean fclean re lib
