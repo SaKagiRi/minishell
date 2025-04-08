@@ -4,8 +4,8 @@ CC			= cc
 HEADER		= -I ./include -I $(LIBFT_DIR)/include
 #------------[FLAGS]
 CFLAGS		= $(DEBUG_FLAGS) $(W_FLAGS)
-DEBUG_FLAGS	= -g3
-W_FLAGS		= -Wall -Wextra -Werror
+DEBUG_FLAGS	= -g3 -lreadline
+W_FLAGS		= #-Wall -Wextra -Werror
 #------------[LIBRARY]
 LIBFT_DIR	= ./lib/KML
 LIBFT_FILE	= $(LIBFT_DIR)/kml.a
@@ -13,16 +13,16 @@ LIBFT_FILE	= $(LIBFT_DIR)/kml.a
 SRC			= $(addprefix srcs/, $(FILE))
 OBJ			= $(SRC:.c=.o)
 #------------[ROOT_FILES]
-FILE		= $(STAGE1) $(STAGE2)
+FILE		= $(MAIN) $(INIT)
 #------------[SUBFILES]
-#------------[STAGE_ONE]
-STAGE1		= $(addprefix $(S1_PATH)/, $(S1_FILE))
-S1_PATH		= stage1
-S1_FILE		= main.c
-	#------------[FUNCTION_PUTSTR]
-	STAGE2		= $(addprefix $(S2_PATH)/, $(S2_FILE))
-	S2_PATH		= $(S1_PATH)/putstr
-	S2_FILE		= putstr.c
+#------------[MAIN]
+MAIN		= $(addprefix $(MAIN_PATH)/, $(MAIN_FILE))
+MAIN_PATH		= main
+MAIN_FILE		= minishell.c get_t.c
+#------------[INIT_MINISHELL]
+INIT		= $(addprefix $(INIT_PATH)/, $(INIT_FILE))
+INIT_PATH		= init_minishell
+INIT_FILE		= init.c get_prompt.c
 #------------[PROCESS]
 all: lib $(NAME)
 $(NAME): $(OBJ) | $(BUILD_DIR)

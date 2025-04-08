@@ -1,19 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   putstr.c                                           :+:      :+:    :+:   */
+/*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: knakto <knakto@student.42bangkok.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/30 21:04:45 by knakto            #+#    #+#             */
-/*   Updated: 2025/03/30 21:07:25 by knakto           ###   ########.fr       */
+/*   Created: 2025/04/06 06:01:47 by knakto            #+#    #+#             */
+/*   Updated: 2025/04/07 00:00:07 by knakto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../include/minishell.h"
+#include "../../include/minishell.h"
+#include <readline/readline.h>
+#include <readline/history.h>
 
-void	ff_putstr(char *str)
+
+int	main(int c, char **v, char **env)
 {
-	while (*str)
-		write(1, str++, 1);
+	char	*line;
+
+	init(c, v, env);
+	while (1)
+	{
+		line = readline(">>");
+		printf("line = %s\n", line);
+		if (line == NULL)
+			break ;
+	}
 }

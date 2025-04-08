@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   init_minishell.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: knakto <knakto@student.42bangkok.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/30 21:06:28 by knakto            #+#    #+#             */
-/*   Updated: 2025/03/31 00:09:58 by knakto           ###   ########.fr       */
+/*   Created: 2025/04/06 06:02:42 by knakto            #+#    #+#             */
+/*   Updated: 2025/04/06 17:52:20 by knakto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#ifndef INIT_MINISHELL_H
+# define INIT_MINISHELL_H
 
-int	main(void)
-{
-	pnf("Hello world\n");
-	return (0);
-}
+void	init(int c, char **v, char **env);
+char	*get_user_name(void);
+
+#endif
