@@ -13,7 +13,7 @@ LIBFT_FILE	= $(LIBFT_DIR)/kml.a
 SRC			= $(addprefix srcs/, $(FILE))
 OBJ			= $(SRC:.c=.o)
 #------------[ROOT_FILES]
-FILE		= $(MAIN) $(INIT) $(EXEC)
+FILE		= $(MAIN) $(INIT) $(EXEC) $(ENV)
 #------------[SUBFILES]
 #------------[MAIN]
 MAIN		= $(addprefix $(MAIN_PATH)/, $(MAIN_FILE))
@@ -27,6 +27,10 @@ INIT_FILE		= init.c
 EXEC		= $(addprefix $(EXEC_PATH)/, $(EXEC_FILE))
 EXEC_PATH		= execution
 EXEC_FILE		= pipe.c
+#------------[ENV]
+ENV		= $(addprefix $(ENV_PATH)/, $(ENV_FILE))
+ENV_PATH		= export
+ENV_FILE		= env.c env_collect.c env_search.c env_sort.c
 #------------[PROCESS]
 all: lib $(NAME)
 $(NAME): $(OBJ) | $(BUILD_DIR)

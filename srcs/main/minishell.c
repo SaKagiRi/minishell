@@ -6,7 +6,7 @@
 /*   By: knakto <knakto@student.42bangkok.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 06:01:47 by knakto            #+#    #+#             */
-/*   Updated: 2025/04/07 00:00:07 by knakto           ###   ########.fr       */
+/*   Updated: 2025/04/09 04:05:26 by knakto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,6 @@
 
 int	main(int c, char **v, char **env)
 {
-	char	*line;
-
-	init(c, v, env);
-	while (1)
-	{
-		line = readline(">>");
-		printf("line = %s\n", line);
-		if (line == NULL)
-			break ;
-	}
+	init_clone_env(env);
+	print_env();
 }

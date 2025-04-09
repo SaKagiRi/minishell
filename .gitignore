@@ -1,3 +1,4 @@
 .git
 minishell
 *.o
+*.a
