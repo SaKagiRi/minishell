@@ -6,9 +6,10 @@
 /*   By: knakto <knakto@student.42bangkok.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 17:11:21 by knakto            #+#    #+#             */
-/*   Updated: 2025/04/13 00:32:42 by knakto           ###   ########.fr       */
+/*   Updated: 2025/04/13 01:02:15 by knakto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "exec.h"
 
 static int	file_in(int *fd, t_redirect *re)

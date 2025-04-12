@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: knakto <knakto@student.42bangkok.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/11 18:21:13 by knakto            #+#    #+#             */
-/*   Updated: 2025/04/12 00:19:55 by knakto           ###   ########.fr       */
+/*   Created: 2025/04/13 01:24:26 by knakto            #+#    #+#             */
+/*   Updated: 2025/04/13 01:24:27 by knakto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,21 @@ void	ft_heredoc(t_redirect *redirect)
 	}
 	pnf_fd(2, HEREDOC_ERR, redirect->value);
 	end_heredoc(redirect, name_file, fd);
+}
+
+void	read_all_heredoc(t_process *proc)
+{
+	t_redirect	*re;
+
+	while (proc)
+	{
+		re = proc->redirect;
+		while (re)
+		{
+			if (re->type == HERE_DOC)
+				ft_heredoc(re);
+			re = re->next;
+		}
+		proc = proc->next;
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: knakto <knakto@student.42bangkok.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 18:57:58 by knakto            #+#    #+#             */
-/*   Updated: 2025/04/13 00:21:32 by knakto           ###   ########.fr       */
+/*   Updated: 2025/04/13 01:24:05 by knakto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <fcntl.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <sys/wait.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 # include "../../lib/KML/include/kml.h"
@@ -49,9 +50,11 @@ t_process	**get_t_process(void);
 char		***env(void);
 void		exec(char **cmd, char **env);
 void		ft_heredoc(t_redirect *redirect);
+void		read_all_heredoc(t_process *proc);
 void		check_access_file(t_redirect *re);
 void		clear_t_process(void);
 void		redirect(t_process *proc);
+void		process(void);
 
 # define HEREDOC_ERR "\nbash: warning: here-document at line delimited \
 by end-of-file (wanted `%s')\n"

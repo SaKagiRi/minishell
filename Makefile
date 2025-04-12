@@ -25,7 +25,7 @@ INIT_FILE		= init.c
 #------------[EXECUTION]
 EXEC		= $(addprefix $(EXEC_PATH)/, $(EXEC_FILE))
 EXEC_PATH		= execution
-EXEC_FILE		= exec.c temp_env.c heredoc.c redirect.c clear.c get_t.c
+EXEC_FILE		= exec.c temp_env.c heredoc.c redirect.c clear.c get_t.c process.c
 #------------[ENV]
 ENV		= $(addprefix $(ENV_PATH)/, $(ENV_FILE))
 ENV_PATH		= export
