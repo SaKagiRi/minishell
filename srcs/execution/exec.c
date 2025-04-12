@@ -1,10 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec.c                                             :+:      :+:    :+:   */ /*                                                    +:+ +:+         +:+     */ /*   By: knakto <knakto@student.42bangkok.com>      +#+  +:+       +#+        */
+/*   exec.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: knakto <knakto@student.42bangkok.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/08 18:57:24 by knakto            #+#    #+#             */
-/*   Updated: 2025/04/11 17:10:02 by knakto           ###   ########.fr       */
+/*   Created: 2025/04/13 00:21:47 by knakto            #+#    #+#             */
+/*   Updated: 2025/04/13 00:21:48 by knakto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,11 +97,12 @@ void	exec(char **cmd, char **env)
 	if (!status)
 	{
 		pnf_fd(2, "bash: %s: No such file or directory\n", cmd[0]);
+		clear_t_process();
 		free_split(cmd);
 		exit(EXIT_FAILURE);
 	}
 	execve(cmd[0], cmd, env);
 	pnf_fd(2, "bash: %s: No such file or directory\n", cmd[0]);
-	free_split(cmd);
+	clear_t_process();
 	exit(EXIT_FAILURE);
 }

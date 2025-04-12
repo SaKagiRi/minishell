@@ -6,7 +6,7 @@
 /*   By: knakto <knakto@student.42bangkok.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 21:15:53 by knakto            #+#    #+#             */
-/*   Updated: 2025/04/09 04:52:05 by knakto           ###   ########.fr       */
+/*   Updated: 2025/04/10 00:13:49 by knakto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,15 @@
 bool	set_last_null(char **key)
 {
 	char	*str;
+	int		i;
 
 	str = *key;
-	while (*(str + 1))
-		str++;
-	if (*str == '=')
+	i = 0;
+	while (str[i + 1])
+		i++;
+	if (str[i] == '=')
 	{
-		*str = '\0';
+		str[i] = '\0';
 		return (true);
 	}
 	return (false);
@@ -47,17 +49,50 @@ t_env	*env_new(char *key, char *value)
 	return (env);
 }
 
-void	print_env(void)
+int	count_env(t_env *env)
 {
-	t_env	*env;
+	int	i;
 
-	env = *get_t_env();
+	i = 0;
 	while (env)
 	{
-		if (!env->value)
-			pnf("%s=\n", env->key);
-		else
-			pnf("%s=%s\n", env->key, env->value);
+		if (env->env)
+			i++;
 		env = env->next;
 	}
+	return (i);
+}
+
+void	update_env(t_env *in_env)
+{
+	char	**env;
+	char	*temp;
+	int		i;
+
+	env = *get_env();
+	if (env)
+		free_split(env);
+	i = count_env(in_env);
+	env = malloc(sizeof(char *) * (i + 1));
+	if (!env)
+		return ;
+	i = 0;
+	while (in_env)
+	{
+		while (!in_env->env)
+			in_env = in_env->next;
+		temp = ft_strjoin(in_env->key, "=");
+		if (in_env->value)
+			temp = fjoin(temp, in_env->value);
+		else
+			temp = fjoin(temp, "");
+		env[i++] = temp;
+		in_env = in_env->next;
+	}
+	env[i] = NULL;
+	*get_env() = env;
+}
+
+void	ft_clear_env(void)
+{
 }

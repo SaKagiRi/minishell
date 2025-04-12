@@ -6,7 +6,7 @@
 /*   By: knakto <knakto@student.42bangkok.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 20:45:21 by knakto            #+#    #+#             */
-/*   Updated: 2025/04/09 04:31:50 by knakto           ###   ########.fr       */
+/*   Updated: 2025/04/10 00:10:44 by knakto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,13 @@
 t_env	**get_t_env(void)
 {
 	static t_env	*env = NULL;
+
+	return (&env);
+}
+
+char	***get_env(void)
+{
+	static char	**env = NULL;
 
 	return (&env);
 }
@@ -42,6 +49,7 @@ void	init_clone_env(char **in_env)
 		node = node->next;
 		i++;
 	}
+	update_env(*env);
 }
 
 void	ft_export()

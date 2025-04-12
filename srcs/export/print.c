@@ -1,27 +1,47 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print.h                                            :+:      :+:    :+:   */
+/*   print.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: knakto <knakto@student.42bangkok.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/04 19:01:06 by knakto            #+#    #+#             */
-/*   Updated: 2025/04/11 04:24:09 by knakto           ###   ########.fr       */
+/*   Created: 2025/04/10 00:14:02 by knakto            #+#    #+#             */
+/*   Updated: 2025/04/10 00:22:41 by knakto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PRINT_H
-# define PRINT_H
+#include "env.h"
 
-# include <unistd.h>
-# include <stdarg.h>
+void	print_env(void)
+{
+	char	**env;
 
-void	ft_putnbr_fd(int n, int fd);
-int		ft_putstr_fd(char *s, int fd);
-int		ft_putendl_fd(char *s, int fd);
-int		ft_putchar_fd(char c, int fd);
-int		pnf(const char *str, ...);
-int		pnf_fd(int fd, const char *str, ...);
-int		*get_fd(void);
+	env = *get_env();
+	while (*env)
+	{
+		pnf("%s\n", *env);
+		env++;
+	}
+}
 
-#endif
+void	print_export(void)
+{
+	t_env	*env;
+
+	env = *get_t_env();
+	while (env)
+	{
+		pnf("declare -x %s", env->key);
+		if (!env->value)
+		{
+			pnf("\n");
+			env = env->next;
+			continue ;
+		}
+		pnf("=");
+		if (*env->value)
+			pnf("%s", env->value);
+		pnf("\n");
+		env = env->next;
+	}
+}

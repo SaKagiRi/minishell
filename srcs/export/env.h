@@ -6,7 +6,7 @@
 /*   By: knakto <knakto@student.42bangkok.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 20:45:27 by knakto            #+#    #+#             */
-/*   Updated: 2025/04/09 04:47:51 by knakto           ###   ########.fr       */
+/*   Updated: 2025/04/10 00:40:13 by knakto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ typedef struct s_env
 	char			*key;
 	char			*value;
 	bool			env;
+	int				index;
 	struct	s_env	*next;
 }	t_env;
 
@@ -43,5 +44,8 @@ t_env	**get_t_env(void); //debug
 t_env	*env_new(char *key, char *value);
 void	init_clone_env(char **in_env);
 void	print_env(void);
+void	print_export(void);
+void	update_env(t_env *env);
+char	***get_env(void);
 
 #endif

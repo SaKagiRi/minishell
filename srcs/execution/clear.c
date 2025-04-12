@@ -1,27 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print.h                                            :+:      :+:    :+:   */
+/*   clear.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: knakto <knakto@student.42bangkok.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/04 19:01:06 by knakto            #+#    #+#             */
-/*   Updated: 2025/04/11 04:24:09 by knakto           ###   ########.fr       */
+/*   Created: 2025/04/12 19:40:54 by knakto            #+#    #+#             */
+/*   Updated: 2025/04/12 21:45:27 by knakto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PRINT_H
-# define PRINT_H
+#include "exec.h"
 
-# include <unistd.h>
-# include <stdarg.h>
+void	clear_t_redirect(t_redirect *re)
+{
+	t_redirect	*temp;
 
-void	ft_putnbr_fd(int n, int fd);
-int		ft_putstr_fd(char *s, int fd);
-int		ft_putendl_fd(char *s, int fd);
-int		ft_putchar_fd(char c, int fd);
-int		pnf(const char *str, ...);
-int		pnf_fd(int fd, const char *str, ...);
-int		*get_fd(void);
+	while (re)
+	{
+		free(re->value);
+		temp = re;
+		re = re->next;
+		free(temp);
+	}
+}
 
-#endif
+void	clear_t_process(void)
+{
+	t_process	*proc;
+	t_process	*temp;
+
+	proc = *get_t_process();
+	while (proc)
+	{
+		free_split(proc->cmd);
+		clear_t_redirect(proc->redirect);
+		temp = proc;
+		proc = proc->next;
+		free(temp);
+	}
+}

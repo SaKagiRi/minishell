@@ -6,7 +6,7 @@
 /*   By: knakto <knakto@student.42bangkok.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 21:05:40 by knakto            #+#    #+#             */
-/*   Updated: 2025/04/08 21:41:48 by knakto           ###   ########.fr       */
+/*   Updated: 2025/04/11 01:30:16 by knakto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include "../lib/KML/include/kml.h"
 # include "../srcs/init_minishell/init_minishell.h"
 # include "../srcs/export/env.h"
+# include "../srcs/execution/exec.h"
 
 typedef	struct	s_msh
 {

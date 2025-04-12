@@ -1,15 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipe.c                                             :+:      :+:    :+:   */
+/*   get_t.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: knakto <knakto@student.42bangkok.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/08 18:57:24 by knakto            #+#    #+#             */
-/*   Updated: 2025/04/08 18:57:48 by knakto           ###   ########.fr       */
+/*   Created: 2025/04/12 20:21:47 by knakto            #+#    #+#             */
+/*   Updated: 2025/04/12 20:45:06 by knakto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "exec.h"
+#include "exec.h"
 
-void	pipex(void);
+t_process	**get_t_process(void)
+{
+	static t_process	*process = NULL;
+
+	return (&process);
+}

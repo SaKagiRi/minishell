@@ -6,13 +6,54 @@
 /*   By: knakto <knakto@student.42bangkok.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 18:57:58 by knakto            #+#    #+#             */
-/*   Updated: 2025/04/08 18:58:59 by knakto           ###   ########.fr       */
+/*   Updated: 2025/04/13 00:21:32 by knakto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EXEC_H
 # define EXEC_H
 
-void	pipex(void);
+# include <stdlib.h>
+# include <stdbool.h>
+# include <fcntl.h>
+# include <stdlib.h>
+# include <unistd.h>
+# include <readline/readline.h>
+# include <readline/history.h>
+# include "../../lib/KML/include/kml.h"
+
+typedef enum e_redirect_type
+{
+	READ_FILE,
+	HERE_DOC,
+	WRITE_FILE,
+	APPEND_FILE,
+}	t_redirect_type;
+
+typedef struct s_redirect
+{
+	t_redirect_type		type;
+	char				*value;
+	struct s_redirect	*next;
+}	t_redirect;
+
+typedef struct s_process
+{
+	char				**cmd;
+	t_redirect			*redirect;
+	pid_t				pid;
+	struct s_process	*next;
+}	t_process;
+
+t_process	**get_t_process(void);
+char		***env(void);
+void		exec(char **cmd, char **env);
+void		ft_heredoc(t_redirect *redirect);
+void		check_access_file(t_redirect *re);
+void		clear_t_process(void);
+void		redirect(t_process *proc);
+
+# define HEREDOC_ERR "\nbash: warning: here-document at line delimited \
+by end-of-file (wanted `%s')\n"
 
 #endif
