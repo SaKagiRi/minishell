@@ -6,7 +6,7 @@
 /*   By: knakto <knakto@student.42bangkok.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 06:01:47 by knakto            #+#    #+#             */
-/*   Updated: 2025/04/13 01:19:20 by knakto           ###   ########.fr       */
+/*   Updated: 2025/04/13 18:12:14 by knakto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,14 +68,6 @@ t_process	*ft_new_proc(char *cmd, t_redirect *re)
 // 	}
 // }
 
-void	set_env(void)
-{
-	char	**eenv;
-
-	eenv = *env();
-	eenv[0] = "hello";
-}
-
 int	main(int c, char **v, char **envp)
 {
 	t_redirect	*re;
@@ -90,7 +82,7 @@ int	main(int c, char **v, char **envp)
 	// exec(cmd, *env());
 	
 	// NOTE: test-heredoc
-	// re = ft_new_re("eof", HERE_DOC);
+	re = ft_new_re("eof", HERE_DOC);
 	// re->next = ft_new_re("end", HERE_DOC);
 	// re->next->next = ft_new_re("out1", WRITE_FILE);
 	re->next = ft_new_re("Makefile", READ_FILE);
@@ -100,6 +92,6 @@ int	main(int c, char **v, char **envp)
 	process();
 	// redirect(proc);
 	// exec(proc->cmd, *env());
-	// clear_t_process();
+	clear_t_process();
 	// check_access_file(re);
 }
