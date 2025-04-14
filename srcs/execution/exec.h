@@ -6,7 +6,7 @@
 /*   By: knakto <knakto@student.42bangkok.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 18:57:58 by knakto            #+#    #+#             */
-/*   Updated: 2025/04/15 02:11:59 by knakto           ###   ########.fr       */
+/*   Updated: 2025/04/15 02:22:34 by knakto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include "../../lib/KML/include/kml.h"
-# include "../export/env.h"
+# include "../environment_variables/env.h"
 
 typedef enum e_redirect_type
 {

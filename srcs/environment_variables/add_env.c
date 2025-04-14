@@ -1,27 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_pwd.c                                           :+:      :+:    :+:   */
+/*   add_env.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: knakto <knakto@student.42bangkok.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/15 01:55:23 by knakto            #+#    #+#             */
-/*   Updated: 2025/04/15 04:18:31 by knakto           ###   ########.fr       */
+/*   Created: 2025/04/15 04:51:22 by knakto            #+#    #+#             */
+/*   Updated: 2025/04/15 05:14:44 by knakto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtin.h"
+#include "env.h"
 
-void	ft_pwd(char **arg)
+int	search(char *key)
 {
-	char	thispath[1024];
+	t_env	*env;
 
-	if (len_arg(arg) != 1)
+	env = *get_t_env();
+	while (env)
 	{
-		pnf_fd(2, "bash: pwd: too many arguments\n");
+		if (!ft_strncmp(env->key, key, ft_strlen(key) + 1))
+			return (1);
+		env = env->next;
+	}
+	return (0);
+}
+
+void	add_env(char *key, char *value)
+{
+	t_env	*env;
+
+	env = *get_t_env();
+	if (search(key))
+	{
+		set_value_env(key, value);
 		return ;
 	}
-	if (!getcwd(thispath, sizeof(thispath)))
-		return ;
-	pnf("%s\n", thispath);
+	while (env->next)
+		env = env->next;
+	env->next = new_env(key, value);
+	set_env();
 }

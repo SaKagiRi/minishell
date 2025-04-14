@@ -1,27 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_pwd.c                                           :+:      :+:    :+:   */
+/*   ft_unset.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: knakto <knakto@student.42bangkok.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/15 01:55:23 by knakto            #+#    #+#             */
-/*   Updated: 2025/04/15 04:18:31 by knakto           ###   ########.fr       */
+/*   Created: 2025/04/15 05:23:32 by knakto            #+#    #+#             */
+/*   Updated: 2025/04/15 05:49:15 by knakto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtin.h"
 
-void	ft_pwd(char **arg)
+void	ft_unset(char **arg)
 {
-	char	thispath[1024];
+	int		i;
 
-	if (len_arg(arg) != 1)
-	{
-		pnf_fd(2, "bash: pwd: too many arguments\n");
+	if (len_arg(arg) == 1)
 		return ;
-	}
-	if (!getcwd(thispath, sizeof(thispath)))
-		return ;
-	pnf("%s\n", thispath);
+	i = 1;
+	while (arg[i])
+		del_env(arg[i++]);
 }

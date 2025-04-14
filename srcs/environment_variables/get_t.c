@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_pwd.c                                           :+:      :+:    :+:   */
+/*   get_t.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: knakto <knakto@student.42bangkok.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/15 01:55:23 by knakto            #+#    #+#             */
-/*   Updated: 2025/04/15 04:18:31 by knakto           ###   ########.fr       */
+/*   Created: 2025/04/15 02:23:32 by knakto            #+#    #+#             */
+/*   Updated: 2025/04/15 05:50:54 by knakto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtin.h"
+#include "env.h"
 
-void	ft_pwd(char **arg)
+char	***env(void)
 {
-	char	thispath[1024];
+	static char	**env = NULL;
 
-	if (len_arg(arg) != 1)
-	{
-		pnf_fd(2, "bash: pwd: too many arguments\n");
-		return ;
-	}
-	if (!getcwd(thispath, sizeof(thispath)))
-		return ;
-	pnf("%s\n", thispath);
+	return (&env);
+}
+
+t_env	**get_t_env(void)
+{
+	static t_env	*env;
+
+	return (&env);
 }

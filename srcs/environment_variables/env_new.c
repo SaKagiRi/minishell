@@ -1,20 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   temp_env.c                                         :+:      :+:    :+:   */
+/*   env_new.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: knakto <knakto@student.42bangkok.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/11 04:07:26 by knakto            #+#    #+#             */
-/*   Updated: 2025/04/11 04:07:38 by knakto           ###   ########.fr       */
+/*   Created: 2025/04/15 02:40:44 by knakto            #+#    #+#             */
+/*   Updated: 2025/04/15 02:51:58 by knakto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "exec.h"
+#include "env.h"
 
-char	***env(void)
+t_env	*new_env(char *key, char *value)
 {
-	static char	**env;
+	t_env	*env;
 
-	return (&env);
+	if (!key)
+		return (NULL);
+	env = malloc(sizeof(t_env));
+	if (!env)
+		return (NULL);
+	env->value = NULL;
+	if (value)
+		env->value = ft_strdup(value);
+	env->key = ft_strdup(key);
+	env->next = NULL;
+	return (env);
 }

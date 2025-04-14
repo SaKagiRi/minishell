@@ -6,16 +6,18 @@
 /*   By: knakto <knakto@student.42bangkok.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 19:22:21 by knakto            #+#    #+#             */
-/*   Updated: 2025/04/15 01:56:24 by knakto           ###   ########.fr       */
+/*   Updated: 2025/04/15 04:14:10 by knakto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtin.h"
-#include <readline/history.h>
-#include <unistd.h>
 
-static void	set_env(void)
+static void	set_old_pwd(char *thispath)
 {
+	set_value_env("OLDPWD", thispath);
+	if (!getcwd(thispath, sizeof(thispath)))
+		return ;
+	set_value_env("PWD", thispath);
 }
 
 static void	go_to_home(void)
@@ -82,6 +84,7 @@ static void	change_dir(char **arg)
 	else
 		set_env();
 	free(nextpath);
+	set_old_pwd(thispath);
 }
 
 void	ft_chdir(char **arg)

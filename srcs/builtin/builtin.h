@@ -6,7 +6,7 @@
 /*   By: knakto <knakto@student.42bangkok.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 19:22:40 by knakto            #+#    #+#             */
-/*   Updated: 2025/04/15 02:06:26 by knakto           ###   ########.fr       */
+/*   Updated: 2025/04/15 05:49:27 by knakto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,18 @@
 # define BUILTIN_H
 
 # include <unistd.h>
+# include <sys/wait.h>
 # include "../../lib/KML/include/kml.h"
-# include "../export/env.h"
+# include "../environment_variables/env.h"
 
 typedef enum e_use_function
 {
-	CD,
-	PWD,
-	ECHO,
+	FT_CD,
+	FT_PWD,
+	FT_ENV,
+	FT_ECHO,
+	FT_EXPORT,
+	FT_UNSET,
 }	t_use_function;
 
 typedef enum e_redirect_type
@@ -52,6 +56,10 @@ int		len_arg(char **arg);
 void	ft_chdir(char **arg);
 void	ft_echo(char **arg);
 void	ft_pwd(char **arg);
+void	ft_env(char **arg);
+void	ft_export(char **arg);
+void	ft_unset(char **arg);
 void	redirect(t_process *proc);
+void	clear_t_process(void);
 
 #endif
