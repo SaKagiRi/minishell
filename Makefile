@@ -13,7 +13,7 @@ LIBFT_FILE	= $(LIBFT_DIR)/kml.a
 SRC			= $(addprefix srcs/, $(FILE))
 OBJ			= $(SRC:.c=.o)
 #------------[ROOT_FILES]
-FILE		= $(MAIN) $(INIT) $(EXEC) $(ENV)
+FILE		= $(MAIN) $(INIT) $(EXEC) $(ENV) $(BUILTIN)
 #------------[SUBFILES] #------------[MAIN]
 MAIN		= $(addprefix $(MAIN_PATH)/, $(MAIN_FILE))
 MAIN_PATH		= main
@@ -25,7 +25,11 @@ INIT_FILE		= init.c
 #------------[EXECUTION]
 EXEC		= $(addprefix $(EXEC_PATH)/, $(EXEC_FILE))
 EXEC_PATH		= execution
-EXEC_FILE		= exec.c temp_env.c heredoc.c redirect.c clear.c get_t.c process.c
+EXEC_FILE		= exec.c heredoc.c redirect.c clear.c get_t.c process.c
+#------------[BUILTIN]
+BUILTIN		= $(addprefix $(BUILTIN_PATH)/, $(BUILTIN_FILE))
+BUILTIN_PATH		= builtin
+BUILTIN_FILE		= ft_chdir.c builtin.c ft_echo.c
 #------------[ENV]
 ENV		= $(addprefix $(ENV_PATH)/, $(ENV_FILE))
 ENV_PATH		= export

@@ -1,31 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_pwd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: knakto <knakto@student.42bangkok.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/30 21:05:40 by knakto            #+#    #+#             */
-/*   Updated: 2025/04/15 02:10:13 by knakto           ###   ########.fr       */
+/*   Created: 2025/04/15 01:55:23 by knakto            #+#    #+#             */
+/*   Updated: 2025/04/15 01:59:56 by knakto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "builtin.h"
 
-# include <unistd.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include "../lib/KML/include/kml.h"
-# include "../srcs/init_minishell/init_minishell.h"
-# include "../srcs/export/env.h"
-# include "../srcs/execution/exec.h"
-
-typedef	struct	s_msh
+void	ft_pwd(char **arg)
 {
-	char	*prompt;
-}	t_msh;
+	char	thispath[1024];
 
-t_msh	*get_shell(void);
-
-#endif
+	if (len_arg(arg) != 1)
+	{
+		pnf_fd(2, "bash: cd: too many arguments\n");
+		return ;
+	}
+	if (!getcwd(thispath, sizeof(thispath)))
+		return ;
+	pnf("%s\n", thispath);
+}

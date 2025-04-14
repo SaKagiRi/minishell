@@ -6,7 +6,7 @@
 /*   By: knakto <knakto@student.42bangkok.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 00:37:28 by knakto            #+#    #+#             */
-/*   Updated: 2025/04/13 18:16:05 by knakto           ###   ########.fr       */
+/*   Updated: 2025/04/15 01:25:09 by knakto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,8 @@ void	process(void)
 
 	proc = *get_t_process();
 	read_all_heredoc(proc);
+	if (!proc->next && builtin(proc))
+		return ;
 	while (proc->next)
 	{
 		run_process(proc);
