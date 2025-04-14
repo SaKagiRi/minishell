@@ -18,10 +18,6 @@ FILE		= $(MAIN) $(INIT) $(EXEC) $(ENV) $(BUILTIN)
 MAIN		= $(addprefix $(MAIN_PATH)/, $(MAIN_FILE))
 MAIN_PATH		= main
 MAIN_FILE		= minishell.c get_t.c
-#------------[INIT_MINISHELL]
-INIT		= $(addprefix $(INIT_PATH)/, $(INIT_FILE))
-INIT_PATH		= init_minishell
-INIT_FILE		= init.c
 #------------[EXECUTION]
 EXEC		= $(addprefix $(EXEC_PATH)/, $(EXEC_FILE))
 EXEC_PATH		= execution
@@ -29,11 +25,11 @@ EXEC_FILE		= exec.c heredoc.c redirect.c clear.c get_t.c process.c
 #------------[BUILTIN]
 BUILTIN		= $(addprefix $(BUILTIN_PATH)/, $(BUILTIN_FILE))
 BUILTIN_PATH		= builtin
-BUILTIN_FILE		= ft_chdir.c builtin.c ft_echo.c
+BUILTIN_FILE		= ft_chdir.c builtin.c ft_echo.c ft_pwd.c ft_env.c ft_export.c ft_unset.c
 #------------[ENV]
 ENV		= $(addprefix $(ENV_PATH)/, $(ENV_FILE))
-ENV_PATH		= export
-ENV_FILE		= env.c env_collect.c env_search.c export_sort.c print.c
+ENV_PATH		= environment_variables
+ENV_FILE		= get_t.c env_new.c init_env.c print_env.c set_env.c add_env.c del_env.c
 #------------[PROCESS]
 all: lib $(NAME)
 $(NAME): $(OBJ) | $(BUILD_DIR)
