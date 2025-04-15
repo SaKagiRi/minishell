@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: knakto <knakto@student.42bangkok.com>      +#+  +:+       +#+        */
+/*   By: gyeepach <gyeepach@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 21:05:40 by knakto            #+#    #+#             */
-/*   Updated: 2025/04/08 21:41:48 by knakto           ###   ########.fr       */
+/*   Updated: 2025/04/15 09:21:14 by gyeepach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 # include "../lib/KML/include/kml.h"
 # include "../srcs/init_minishell/init_minishell.h"
 # include "../srcs/export/env.h"
+
+extern volatile sig_atomic_t g_signal;
 
 typedef	struct	s_msh
 {
