@@ -1,4 +1,4 @@
-สิ่งที่เพิ่มเติมใน อันนี้คือ sigaction ของการกด ปุ่มๆ hot key ต่างๆสำหรับ minishell
+สิ่งที่เพิ่มเติมใน อันนี้คือ sigaction ของการกด ปุ่ม hot key ต่างๆสำหรับ minishell
 สื่งที่เพิ่ม และ แก้ไข:
 - มีไฟล์ singal_bind สำหรับฟังก์ชั่น signal (อยู่ใน srcs/main/signal_bind.c)
 - แก้main function ให้ลองเทส กับ signal เล่นๆ
