@@ -6,7 +6,7 @@
 /*   By: knakto <knakto@student.42bangkok.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 00:21:47 by knakto            #+#    #+#             */
-/*   Updated: 2025/04/15 04:16:57 by knakto           ###   ########.fr       */
+/*   Updated: 2025/04/17 02:27:53 by knakto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,10 +98,10 @@ void	exec(char **cmd, char **env)
 	{
 		pnf_fd(2, "bash: %s: No such file or directory\n", cmd[0]);
 		clear_t_process();
-		exit(EXIT_FAILURE);
+		set_exit(127);
 	}
 	execve(cmd[0], cmd, env);
 	pnf_fd(2, "bash: %s: No such file or directory\n", cmd[0]);
 	clear_t_process();
-	exit(EXIT_FAILURE);
+	exit(127);
 }

@@ -1,19 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_minishell.h                                   :+:      :+:    :+:   */
+/*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: knakto <knakto@student.42bangkok.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/06 06:02:42 by knakto            #+#    #+#             */
-/*   Updated: 2025/04/06 17:52:20 by knakto           ###   ########.fr       */
+/*   Created: 2025/04/16 01:14:47 by knakto            #+#    #+#             */
+/*   Updated: 2025/04/17 03:12:41 by knakto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef INIT_MINISHELL_H
-# define INIT_MINISHELL_H
+#include "exit.h"
 
-void	init(int c, char **v, char **env);
-char	*get_user_name(void);
+int	*exnum(void)
+{
+	static int	status = 0;
 
-#endif
+	return (&status);
+}
+
+static int	*ext(void)
+{
+	static int	ext = 0;
+
+	return (&ext);
+}
+
+bool	is_exit(int num)
+{
+	if (num == 0)
+		return (!*ext());
+	*ext() = num;
+	return (!*ext());
+}
+
+void	set_exit(int num)
+{
+	if (num == -1)
+		exit(EXIT_FAILURE);
+	*exnum() = num;
+	exit(*exnum());
+}

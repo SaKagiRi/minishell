@@ -6,7 +6,7 @@
 /*   By: knakto <knakto@student.42bangkok.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 19:29:04 by knakto            #+#    #+#             */
-/*   Updated: 2025/04/15 05:25:14 by knakto           ###   ########.fr       */
+/*   Updated: 2025/04/17 01:44:14 by knakto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ void	use_function(t_process *proc, t_use_function func)
 		ft_export(proc->cmd);
 	else if (func == FT_UNSET)
 		ft_unset(proc->cmd);
+	else if (func == FT_EXIT)
+		ft_exit(proc);
 }
 
 int	builtin(t_process *proc)
@@ -79,6 +81,9 @@ int	builtin(t_process *proc)
 	else if (!ft_strncmp(proc->cmd[0], "unset", 7) \
 		|| !ft_strncmp(proc->cmd[0], "unset ", 7))
 		use_function(proc, FT_UNSET);
+	else if (!ft_strncmp(proc->cmd[0], "exit", 5) \
+		|| !ft_strncmp(proc->cmd[0], "exit ", 5))
+		use_function(proc, FT_EXIT);
 	else
 		return (0);
 	return (1);

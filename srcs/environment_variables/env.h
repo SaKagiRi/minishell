@@ -6,7 +6,7 @@
 /*   By: knakto <knakto@student.42bangkok.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 02:22:59 by knakto            #+#    #+#             */
-/*   Updated: 2025/04/15 05:51:05 by knakto           ###   ########.fr       */
+/*   Updated: 2025/04/16 01:16:54 by knakto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include "../../lib/KML/include/kml.h"
+# include "../exit/exit.h"
 
 typedef struct s_env
 {

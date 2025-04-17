@@ -6,7 +6,7 @@
 /*   By: knakto <knakto@student.42bangkok.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 17:11:21 by knakto            #+#    #+#             */
-/*   Updated: 2025/04/14 19:46:46 by knakto           ###   ########.fr       */
+/*   Updated: 2025/04/17 02:28:10 by knakto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,13 +54,13 @@ static void	fd_err(int fd_in, int fd_out, int status, t_redirect *re)
 	{
 		pnf_fd(2, "bash: %s: No such file or directory\n", re->value);
 		clear_t_process();
-		exit(EXIT_FAILURE);
+		exit(127);
 	}
 	else if (status == 2)
 	{
 		pnf_fd(2, "bash: %s: Permission denied\n", re->value);
 		clear_t_process();
-		exit(EXIT_FAILURE);
+		exit(126);
 	}
 }
 

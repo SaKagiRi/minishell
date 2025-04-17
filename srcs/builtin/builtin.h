@@ -6,7 +6,7 @@
 /*   By: knakto <knakto@student.42bangkok.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 19:22:40 by knakto            #+#    #+#             */
-/*   Updated: 2025/04/15 05:49:27 by knakto           ###   ########.fr       */
+/*   Updated: 2025/04/17 01:44:11 by knakto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <sys/wait.h>
 # include "../../lib/KML/include/kml.h"
 # include "../environment_variables/env.h"
+# include "../exit/exit.h"
 
 typedef enum e_use_function
 {
@@ -26,6 +27,7 @@ typedef enum e_use_function
 	FT_ECHO,
 	FT_EXPORT,
 	FT_UNSET,
+	FT_EXIT,
 }	t_use_function;
 
 typedef enum e_redirect_type
@@ -61,5 +63,6 @@ void	ft_export(char **arg);
 void	ft_unset(char **arg);
 void	redirect(t_process *proc);
 void	clear_t_process(void);
+void	ft_exit(t_process *proc);
 
 #endif

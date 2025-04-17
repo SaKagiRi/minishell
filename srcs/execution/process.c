@@ -6,7 +6,7 @@
 /*   By: knakto <knakto@student.42bangkok.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 00:37:28 by knakto            #+#    #+#             */
-/*   Updated: 2025/04/15 04:25:47 by knakto           ###   ########.fr       */
+/*   Updated: 2025/04/17 03:03:53 by knakto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,14 @@ static void	run_process(t_process *proc)
 	{
 		pnf_fd(2, "bash: error: broken pipe\n");
 		clear_t_process();
-		exit(EXIT_FAILURE);
+		exit(1);
 	}
 	proc->pid = fork();
 	if (proc->pid < 0)
 	{
 		pnf_fd(2, "bash: error: broken fork\n");
 		clear_t_process();
-		exit(EXIT_FAILURE);
+		exit(1);
 	}
 	if (proc->pid == 0)
 	{
@@ -43,19 +43,25 @@ static void	run_process(t_process *proc)
 
 static int	process_out(t_process *proc)
 {
-	int	exit_status;
+	int		exit_status;
 
 	proc->pid = fork();
 	if (proc->pid < 0)
 	{
 		pnf_fd(2, "bash: error: broken fork\n");
 		clear_t_process();
-		exit(EXIT_FAILURE);
+		exit(1);
 	}
 	if (proc->pid == 0)
 	{
 		redirect(proc);
 		exec(proc->cmd, *env());
+	}
+	proc = *get_t_process();
+	while (proc->next)
+	{
+		wait(NULL);
+		proc = proc->next;
 	}
 	wait(&exit_status);
 	return (exit_status);
@@ -74,9 +80,7 @@ void	process(void)
 	while (proc->next)
 	{
 		run_process(proc);
-		if (proc->pid != 0)
-			wait(&exit_status);
 		proc = proc->next;
 	}
-	exit_status = process_out(proc);
+	*exnum() = process_out(proc);
 }

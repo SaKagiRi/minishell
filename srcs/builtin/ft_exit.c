@@ -1,29 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   export_sort.c                                      :+:      :+:    :+:   */
+/*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: knakto <knakto@student.42bangkok.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/08 21:14:29 by knakto            #+#    #+#             */
-/*   Updated: 2025/04/10 00:40:20 by knakto           ###   ########.fr       */
+/*   Created: 2025/04/17 01:41:26 by knakto            #+#    #+#             */
+/*   Updated: 2025/04/17 03:12:52 by knakto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "env.h"
+#include "builtin.h"
+#include <stdio.h>
 
-int	len_export(void)
+void	ft_exit(t_process *proc)
 {
-	t_env	*env;
-	int		i;
-
-	env = *get_t_env();
-	i = 0;
-	while (env)
-	{
-		i++;
-		env = env->next;
-	}
-	return (i);
+	// is_exit(1);
+	printf("%d\n", *exnum() / 256);
 }
-

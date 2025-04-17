@@ -13,23 +13,28 @@ LIBFT_FILE	= $(LIBFT_DIR)/kml.a
 SRC			= $(addprefix srcs/, $(FILE))
 OBJ			= $(SRC:.c=.o)
 #------------[ROOT_FILES]
-FILE		= $(MAIN) $(INIT) $(EXEC) $(ENV) $(BUILTIN)
-#------------[SUBFILES] #------------[MAIN]
-MAIN		= $(addprefix $(MAIN_PATH)/, $(MAIN_FILE))
+FILE		= $(MAIN) $(INIT) $(EXEC) $(ENV) $(BUILTIN) $(EXIT)
+#------------[SUBFILES]
+#------------[MAIN]
+MAIN			= $(addprefix $(MAIN_PATH)/, $(MAIN_FILE))
 MAIN_PATH		= main
 MAIN_FILE		= minishell.c get_t.c
 #------------[EXECUTION]
-EXEC		= $(addprefix $(EXEC_PATH)/, $(EXEC_FILE))
+EXEC			= $(addprefix $(EXEC_PATH)/, $(EXEC_FILE))
 EXEC_PATH		= execution
 EXEC_FILE		= exec.c heredoc.c redirect.c clear.c get_t.c process.c
 #------------[BUILTIN]
-BUILTIN		= $(addprefix $(BUILTIN_PATH)/, $(BUILTIN_FILE))
-BUILTIN_PATH		= builtin
-BUILTIN_FILE		= ft_chdir.c builtin.c ft_echo.c ft_pwd.c ft_env.c ft_export.c ft_unset.c
+BUILTIN			= $(addprefix $(BUILTIN_PATH)/, $(BUILTIN_FILE))
+BUILTIN_PATH	= builtin
+BUILTIN_FILE	= ft_chdir.c builtin.c ft_echo.c ft_pwd.c ft_env.c ft_export.c ft_unset.c ft_exit.c
 #------------[ENV]
-ENV		= $(addprefix $(ENV_PATH)/, $(ENV_FILE))
+ENV				= $(addprefix $(ENV_PATH)/, $(ENV_FILE))
 ENV_PATH		= environment_variables
 ENV_FILE		= get_t.c env_new.c init_env.c print_env.c set_env.c add_env.c del_env.c
+#------------[EXIT]
+EXIT			= $(addprefix $(EXIT_PATH)/, $(EXIT_FILE))
+EXIT_PATH		= exit
+EXIT_FILE		= exit.c
 #------------[PROCESS]
 all: lib $(NAME)
 $(NAME): $(OBJ) | $(BUILD_DIR)
