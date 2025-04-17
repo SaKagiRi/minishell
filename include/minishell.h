@@ -6,7 +6,7 @@
 /*   By: gyeepach <gyeepach@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 21:05:40 by knakto            #+#    #+#             */
-/*   Updated: 2025/04/15 09:21:14 by gyeepach         ###   ########.fr       */
+/*   Updated: 2025/04/17 20:12:30 by gyeepach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <unistd.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include <signal.h>
 # include "../lib/KML/include/kml.h"
 # include "../srcs/init_minishell/init_minishell.h"
 # include "../srcs/export/env.h"
