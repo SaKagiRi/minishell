@@ -1,27 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print.h                                            :+:      :+:    :+:   */
+/*   env_new.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: knakto <knakto@student.42bangkok.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/04 19:01:06 by knakto            #+#    #+#             */
-/*   Updated: 2025/04/11 04:24:09 by knakto           ###   ########.fr       */
+/*   Created: 2025/04/15 02:40:44 by knakto            #+#    #+#             */
+/*   Updated: 2025/04/15 02:51:58 by knakto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PRINT_H
-# define PRINT_H
+#include "env.h"
 
-# include <unistd.h>
-# include <stdarg.h>
+t_env	*new_env(char *key, char *value)
+{
+	t_env	*env;
 
-void	ft_putnbr_fd(int n, int fd);
-int		ft_putstr_fd(char *s, int fd);
-int		ft_putendl_fd(char *s, int fd);
-int		ft_putchar_fd(char c, int fd);
-int		pnf(const char *str, ...);
-int		pnf_fd(int fd, const char *str, ...);
-int		*get_fd(void);
-
-#endif
+	if (!key)
+		return (NULL);
+	env = malloc(sizeof(t_env));
+	if (!env)
+		return (NULL);
+	env->value = NULL;
+	if (value)
+		env->value = ft_strdup(value);
+	env->key = ft_strdup(key);
+	env->next = NULL;
+	return (env);
+}

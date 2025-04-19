@@ -1,27 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print.h                                            :+:      :+:    :+:   */
+/*   get_t.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: knakto <knakto@student.42bangkok.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/04 19:01:06 by knakto            #+#    #+#             */
-/*   Updated: 2025/04/11 04:24:09 by knakto           ###   ########.fr       */
+/*   Created: 2025/04/12 20:21:47 by knakto            #+#    #+#             */
+/*   Updated: 2025/04/12 20:45:06 by knakto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PRINT_H
-# define PRINT_H
+#include "exec.h"
 
-# include <unistd.h>
-# include <stdarg.h>
+t_process	**get_t_process(void)
+{
+	static t_process	*process = NULL;
 
-void	ft_putnbr_fd(int n, int fd);
-int		ft_putstr_fd(char *s, int fd);
-int		ft_putendl_fd(char *s, int fd);
-int		ft_putchar_fd(char c, int fd);
-int		pnf(const char *str, ...);
-int		pnf_fd(int fd, const char *str, ...);
-int		*get_fd(void);
-
-#endif
+	return (&process);
+}

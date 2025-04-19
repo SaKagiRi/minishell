@@ -1,27 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print.h                                            :+:      :+:    :+:   */
+/*   ft_unset.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: knakto <knakto@student.42bangkok.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/04 19:01:06 by knakto            #+#    #+#             */
-/*   Updated: 2025/04/11 04:24:09 by knakto           ###   ########.fr       */
+/*   Created: 2025/04/15 05:23:32 by knakto            #+#    #+#             */
+/*   Updated: 2025/04/15 05:49:15 by knakto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PRINT_H
-# define PRINT_H
+#include "builtin.h"
 
-# include <unistd.h>
-# include <stdarg.h>
+void	ft_unset(char **arg)
+{
+	int		i;
 
-void	ft_putnbr_fd(int n, int fd);
-int		ft_putstr_fd(char *s, int fd);
-int		ft_putendl_fd(char *s, int fd);
-int		ft_putchar_fd(char c, int fd);
-int		pnf(const char *str, ...);
-int		pnf_fd(int fd, const char *str, ...);
-int		*get_fd(void);
-
-#endif
+	if (len_arg(arg) == 1)
+		return ;
+	i = 1;
+	while (arg[i])
+		del_env(arg[i++]);
+}

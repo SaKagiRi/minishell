@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print.h                                            :+:      :+:    :+:   */
+/*   ft_pwd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: knakto <knakto@student.42bangkok.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/04 19:01:06 by knakto            #+#    #+#             */
-/*   Updated: 2025/04/11 04:24:09 by knakto           ###   ########.fr       */
+/*   Created: 2025/04/15 01:55:23 by knakto            #+#    #+#             */
+/*   Updated: 2025/04/15 04:18:31 by knakto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PRINT_H
-# define PRINT_H
+#include "builtin.h"
 
-# include <unistd.h>
-# include <stdarg.h>
+void	ft_pwd(char **arg)
+{
+	char	thispath[1024];
 
-void	ft_putnbr_fd(int n, int fd);
-int		ft_putstr_fd(char *s, int fd);
-int		ft_putendl_fd(char *s, int fd);
-int		ft_putchar_fd(char c, int fd);
-int		pnf(const char *str, ...);
-int		pnf_fd(int fd, const char *str, ...);
-int		*get_fd(void);
-
-#endif
+	if (len_arg(arg) != 1)
+	{
+		pnf_fd(2, "bash: pwd: too many arguments\n");
+		return ;
+	}
+	if (!getcwd(thispath, sizeof(thispath)))
+		return ;
+	pnf("%s\n", thispath);
+}

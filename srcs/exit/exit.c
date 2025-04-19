@@ -1,27 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print.h                                            :+:      :+:    :+:   */
+/*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: knakto <knakto@student.42bangkok.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/04 19:01:06 by knakto            #+#    #+#             */
-/*   Updated: 2025/04/11 04:24:09 by knakto           ###   ########.fr       */
+/*   Created: 2025/04/16 01:14:47 by knakto            #+#    #+#             */
+/*   Updated: 2025/04/17 03:12:41 by knakto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PRINT_H
-# define PRINT_H
+#include "exit.h"
 
-# include <unistd.h>
-# include <stdarg.h>
+int	*exnum(void)
+{
+	static int	status = 0;
 
-void	ft_putnbr_fd(int n, int fd);
-int		ft_putstr_fd(char *s, int fd);
-int		ft_putendl_fd(char *s, int fd);
-int		ft_putchar_fd(char c, int fd);
-int		pnf(const char *str, ...);
-int		pnf_fd(int fd, const char *str, ...);
-int		*get_fd(void);
+	return (&status);
+}
 
-#endif
+static int	*ext(void)
+{
+	static int	ext = 0;
+
+	return (&ext);
+}
+
+bool	is_exit(int num)
+{
+	if (num == 0)
+		return (!*ext());
+	*ext() = num;
+	return (!*ext());
+}
+
+void	set_exit(int num)
+{
+	if (num == -1)
+		exit(EXIT_FAILURE);
+	*exnum() = num;
+	exit(*exnum());
+}

@@ -6,41 +6,243 @@
 /*   By: gyeepach <gyeepach@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 06:01:47 by knakto            #+#    #+#             */
-/*   Updated: 2025/04/17 20:13:44 by gyeepach         ###   ########.fr       */
+/*   Updated: 2025/04/19 20:27:16 by gyeepach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 #include <readline/readline.h>
 #include <readline/history.h>
+#include <fcntl.h>
+#include <stdlib.h>
+#include <strings.h>
 
 volatile sig_atomic_t	g_signal = 0;
 
-//ตัวนี้จะลองเล่นๆก็ได้ เสร็จแค่ sigaction
-int	main(int c, char **v, char **env)
+t_redirect	*ft_new_re(char *eof, int type)
 {
-	char	*user_input;
-	// char	**split_line;
-	
+	t_redirect	*re;
 
-	init(c, v, env);
-	while (1)
+	re = malloc(sizeof(t_redirect));
+	re->value = NULL;
+	if (eof)
+		re->value = ft_strdup(eof);
+	re->next = NULL;
+	re->type = type;
+	return (re);
+}
+
+t_process	*ft_new_proc(char **cmd, t_redirect *re)
+{
+	t_process	*proc;
+
+	proc = malloc(sizeof(t_process));
+	// proc->redirect = ft_new_re("a", WRITE_FILE);
+	proc->redirect = re;
+	proc->cmd = cmd;
+	proc->next = NULL;
+	return (proc);
+}
+
+// void	while_ft(t_redirect *re)
+// {
+// 	int	fd;
+//
+// 	while (re)
+// 	{
+// 		if (re->type == HERE_DOC)
+// 		{
+// 			ft_heredoc(re);
+// 			// fd = open(re->value, O_RDONLY);
+// 			// if (fd < 0)
+// 			// {
+// 			// 	pnf("Error: fd\n");
+// 			// 	return 1;
+// 			// }
+// 			// line = get_next_line(fd);
+// 			// while (line)
+// 			// {
+// 			// 	pnf("%s", line);
+// 			// 	free(line);
+// 			// 	line = get_next_line(fd);
+// 			// }
+// 			// unlink(re->value);
+// 			// free(re->value);
+// 			// free(re);
+// 		}
+// 		re = re->next;
+// 	}
+
+void	ft_add_proc(t_process **proc, t_process *new)
+{
+	t_process	*node;
+
+	if (!*proc)
 	{
-		set_sig_bind_key();
-		user_input = readline("minishell>");
-		if (user_input != NULL)
-			printf("line = %s\n", user_input);
-		add_history(user_input);
-		if (user_input == NULL)
-		{
-			user_input = ft_strdup("exit");
-			printf("line = %s\n", user_input);
-			break ;
-		}
-		// execution part
+		*proc = new;
+		return ;
+	}
+	node = *proc;
+	while (node->next)
+	{
+		printf("%s\n", *node->cmd);
+		node = node->next;
+	}
+	node->next = new;
+}
+
+void	get_cmd(char *line)
+{
+	t_process	*proc;
+	int			i;
+	char		**all_block_cmd;
+
+	if (!ft_strchr(line, '|'))
+	{
+		proc = ft_new_proc(ft_split(line, ' '), NULL);
+		*get_t_process() = proc;
+		return ;
+	}
+	all_block_cmd = ft_split(line, '|');
+	i = 0;
+	while (all_block_cmd[i])
+		ft_add_proc(get_t_process(), ft_new_proc(ft_split(all_block_cmd[i++], ' '), NULL));
+}
+
+int	check_cd(void)
+{
+	t_process	*proc;
+	char		*nextpath;
+	char		thispath[1024];
+
+	proc = *get_t_process();
+	if (!ft_strncmp(proc->cmd[0], "cd", 3) && proc->cmd[1] && !proc->cmd[2] && !proc->next)
+	{
+		getcwd(thispath, sizeof(thispath));
+		nextpath = ft_strjoin(thispath, "/");
+		nextpath = fjoin(nextpath, proc->cmd[1]);
+		if (chdir(nextpath) != 0)
+			pnf_fd(2, "bash: cd: %s: No such file or directory\n", proc->cmd[1]);
+		free(nextpath);
+		return (1);
 	}
 	return (0);
 }
+void print_word_list(t_word_struct **head)
+{
+    while (*head)
+    {
+        printf("word : %s, type : %d\n", (*head)->word, (*head)->word_type);
+        *head = (*head)->next_word;
+    }
+}
+void clear_word_list(t_word_struct *word_list) 
+{
+    t_word_struct *tmp;
+    while (word_list)
+    {
+        tmp = word_list->next_word;
+        free(word_list->word);
+        free(word_list);
+        word_list = tmp;
+    }
+}
+
+void	get_line(void)
+{
+	char	*line;
+	char	get_path[1024];
+	char	*path;
+	t_word_struct *word_struct;
+
+	word_struct = NULL;
+	while (is_exit(0))
+	{
+		if (!getcwd(get_path, sizeof(get_path)))
+			return ;
+		path = ft_strjoin(ft_strrchr(get_path, '/'), "> ");
+		line = readline(path);
+		if (!line)
+			return ;
+		string_extraction(line, &word_struct);
+		// deug print
+		printf("===== Token List =====\n");
+        print_word_list(&word_struct);
+        printf("======================\n");
+		// จริงๆจะเช็ค syntax ด้วยก็ได้ เพราะ มันมีเคส ที่ มี " ติดมาตัวท้ายด้วย
+		// ตัวอย่าง
+		// /real_minishell_v3> ads "asd"""asdas"
+		// ===== Token List =====
+		// word : ads, type : 0
+		// word : asd, type : 2
+		// word : , type : 2
+		// word : asdas", type : 0
+		// ======================
+		// ตามนี้
+		// clear_word_list(word_struct);
+		// get_cmd(line);
+		// process();
+		// clear_t_process();
+		free(path);
+	}
+}
+
+// NOTE: 
+// -sort export, export unset in other case
+// -error case
+// -exit code
+// -memory leak
+// NOTE: day 15/4 5:44 Updated
+// -finish ft_echo, ft_env, ft_export, ft_pwd, ft_unset and add redirect to it
+// -finish all of env, it can read add change and delete
+// -finish some leak and big error of memory
+// -finish shell level in almost all case (dont have grep case and I dont do it lol)
+// -check norm and push update this day
+// NOTE: 
+int	main(int c, char **v, char **envp)
+{
+	t_redirect	*re;
+	t_process	*proc;
+	int			fd;
+	char		*line;
+	char		*hah;
+
+	// *env() = envp;
+	init_env(envp);
+	// print_env();
+	// get_cmd("cd ..");
+	get_line();
+	// process();
+	// clear_t_process();
+}
+
+
+
+//ตัวนี้จะลองเล่นๆก็ได้ เสร็จแค่ sigaction
+// int	main(int c, char **v, char **env)
+// {
+// 	char	*user_input;
+// 	// char	**split_line;
+	
+
+// 	init(c, v, env);
+// 	while (1)
+// 	{
+// 		set_sig_bind_key();
+// 		user_input = readline("minishell>");
+// 		if (user_input != NULL)
+// 			printf("line = %s\n", user_input);
+// 		add_history(user_input);
+// 		if (user_input == NULL)
+// 		{
+// 			user_input = ft_strdup("exit");
+// 			printf("line = %s\n", user_input);
+// 			break ;
+// 		}
+// 		// execution part
+// 	}
+// 	return (0);
+// }
 
 
 //ตัวหลัก

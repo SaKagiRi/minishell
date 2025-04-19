@@ -4,6 +4,9 @@
 		"minishell.h": "c",
 		"init_minishell.h": "c",
 		"env.h": "c",
-		"kml.h": "c"
+		"kml.h": "c",
+		"readline.h": "c",
+		"stdlib.h": "c",
+		"strings.h": "c"
 	}
 }

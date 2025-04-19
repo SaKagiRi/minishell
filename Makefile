@@ -4,7 +4,7 @@ CC			= cc
 HEADER		= -I ./include -I $(LIBFT_DIR)/include
 #------------[FLAGS]
 CFLAGS		= $(DEBUG_FLAGS) $(W_FLAGS)
-DEBUG_FLAGS	= -g3 -lreadline
+DEBUG_FLAGS	= -g3
 W_FLAGS		= #-Wall -Wextra -Werror
 #------------[LIBRARY]
 LIBFT_DIR	= ./lib/KML
@@ -13,28 +13,36 @@ LIBFT_FILE	= $(LIBFT_DIR)/kml.a
 SRC			= $(addprefix srcs/, $(FILE))
 OBJ			= $(SRC:.c=.o)
 #------------[ROOT_FILES]
-FILE		= $(MAIN) $(INIT) $(EXEC) $(ENV)
+FILE		= $(MAIN) $(INIT) $(EXEC) $(PARSER) $(ENV) $(BUILTIN) $(EXIT)
 #------------[SUBFILES]
 #------------[MAIN]
-MAIN		= $(addprefix $(MAIN_PATH)/, $(MAIN_FILE))
+MAIN			= $(addprefix $(MAIN_PATH)/, $(MAIN_FILE))
 MAIN_PATH		= main
-MAIN_FILE		= minishell.c get_t.c
-#------------[INIT_MINISHELL]
-INIT		= $(addprefix $(INIT_PATH)/, $(INIT_FILE))
-INIT_PATH		= init_minishell
-INIT_FILE		= init.c
+MAIN_FILE		= minishell.c get_t.c signal_bind.c
 #------------[EXECUTION]
-EXEC		= $(addprefix $(EXEC_PATH)/, $(EXEC_FILE))
+EXEC			= $(addprefix $(EXEC_PATH)/, $(EXEC_FILE))
 EXEC_PATH		= execution
-EXEC_FILE		= pipe.c
+EXEC_FILE		= exec.c heredoc.c redirect.c clear.c get_t.c process.c
+#------------[PARSER]
+PARSER			= $(addprefix $(PARSER_PATH)/, $(PARSER_FILE))
+PARSER_PATH		= parser
+PARSER_FILE		= extract.c extract_utils.c
+#------------[BUILTIN]
+BUILTIN			= $(addprefix $(BUILTIN_PATH)/, $(BUILTIN_FILE))
+BUILTIN_PATH	= builtin
+BUILTIN_FILE	= ft_chdir.c builtin.c ft_echo.c ft_pwd.c ft_env.c ft_export.c ft_unset.c ft_exit.c
 #------------[ENV]
-ENV		= $(addprefix $(ENV_PATH)/, $(ENV_FILE))
-ENV_PATH		= export
-ENV_FILE		= env.c env_collect.c env_search.c env_sort.c
+ENV				= $(addprefix $(ENV_PATH)/, $(ENV_FILE))
+ENV_PATH		= environment_variables
+ENV_FILE		= get_t.c env_new.c init_env.c print_env.c set_env.c add_env.c del_env.c
+#------------[EXIT]
+EXIT			= $(addprefix $(EXIT_PATH)/, $(EXIT_FILE))
+EXIT_PATH		= exit
+EXIT_FILE		= exit.c
 #------------[PROCESS]
 all: lib $(NAME)
 $(NAME): $(OBJ) | $(BUILD_DIR)
-		@$(CC) $(CFLAGS) $(OBJ) $(LIBFT_FILE) $(HEADER) -o $@
+		@$(CC) $(CFLAGS) $(OBJ) $(LIBFT_FILE) $(HEADER) -o $@ -lreadline
 		@printf "\033[38;5;46m\033[1m⟪ Complete ⟫\033[0m\n"
 %.o: %.c Makefile
 	@printf "\033[38;5;226;1m"

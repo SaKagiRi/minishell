@@ -8,7 +8,7 @@ CFLAGS		= $(DEBUG_FLAGS) $(W_FLAGS)
 DEBUG_FLAGS	= -g3
 W_FLAGS		= -Wall -Wextra -Werror
 #------------[OBJECT_AND_SOURCE]
-SRC			= $(addprefix srcs/, $(FILE))
+SRC			= $(addprefix srcs/, $(FILE)) #ติด wildcard หรือ เปล่า ???
 OBJ			= $(SRC:%.c=%.o)
 #------------[ROOT_FILES]
 FILE		= $(DIGIT) $(STRING) $(CHARACTER) $(MEMORY) $(PRINT) $(LINKED_LIST) $(GET_NEXT_LINE)
@@ -38,7 +38,7 @@ MEMORY_FILE		= ft_bzero.c ft_memset.c ft_memcpy.c ft_memchr.c ft_memcmp.c ft_cal
 #------------[PRINT]
 PRINT			= $(addprefix $(PRINT_PATH)/, $(PRINT_FILE))
 PRINT_PATH		= print
-PRINT_FILE		= ft_putstr_fd.c ft_putnbr_fd.c ft_putchar_fd.c ft_putendl_fd.c ft_printf.c
+PRINT_FILE		= ft_putstr_fd.c ft_putnbr_fd.c ft_putchar_fd.c ft_putendl_fd.c ft_printf.c ft_printf_fd.c get_t.c
 #------------[LINKED_LIST]
 LINKED_LIST			= $(addprefix $(LINKED_LIST_PATH)/, $(LINKED_LIST_FILE))
 LINKED_LIST_PATH	= linked_list
