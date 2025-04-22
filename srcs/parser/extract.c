@@ -6,18 +6,41 @@
 /*   By: gyeepach <gyeepach@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 06:31:39 by gyeepach          #+#    #+#             */
-/*   Updated: 2025/04/19 20:18:13 by gyeepach         ###   ########.fr       */
+/*   Updated: 2025/04/21 21:45:26 by gyeepach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-t_word_type	sing_or_double(char *start)
+
+void clear_word_list(t_word_struct *word_list)
 {
-	if (*start == '\'')
-		return (SINGLE_QUOTE);
+	t_word_struct *tmp;
+	while (word_list)
+	{
+		tmp = word_list->next_word;
+		free(word_list->word);
+		free(word_list);
+		word_list = tmp;
+	}
+}
+t_word_type	get_word_type(char *start)
+{
+	if (ft_isoperator(start))
+		return (OPERATOR);
+	else if (ft_isquote(*start))
+		return sing_or_double(start);
 	else
-		return (DOUBLE_QUOTE);
+		return (CMD);
+}
+int	get_word_len(char *start, t_word_type type)
+{
+	if (type == OPERATOR)
+		return word_len(start);
+	else if (type == SINGLE_QUOTE || type == DOUBLE_QUOTE)
+		return word_len_inquote(start, type);
+	else
+		return word_len(start);
 }
 
 void	append_node(t_word_struct **head, t_word_struct *new_node)
@@ -59,47 +82,33 @@ t_word_struct *create_new_word(char *word, t_word_type type)
 	return (new_node);
 }
 
-void	string_extraction(char *line, t_word_struct **head)
+static void	process_token(char **start, t_word_struct **head)
 {
 	t_word_struct	*new_word;
 	t_word_type		type;
-	int				count_word_len;
+	int				len;
 	char			*word;
-	char			*start;
-	char			*end;
 
-	*head = NULL;
+	type = get_word_type(*start);
+	len = get_word_len(*start, type);
+	word = extract_input_word(*start, len, type);
+	new_word = create_new_word(word, type);
+	append_node(head, new_word);
+	free(word);
+	*start += len;
+}
+
+void	string_extraction(char *line, t_word_struct **head)
+{
+	char			*start;
+
 	start = line;
 	while (*start)
 	{
 		if (*start && ft_isspace(*start))
-		{
 			start++;
-			continue ;
-		}
-		else if (*start && ft_isoperator(start))
-		{
-			type = OPERATOR;
-			count_word_len = word_len(start);		
-		}
-		else if (*start && ft_isquote(*start))
-		{
-			type = sing_or_double(start);
-			count_word_len = word_len_inquote(start, type);
-		}
 		else
-		{
-			type = CMD;
-			count_word_len = word_len(start);
-		}
-		word = extract_input_word(start, count_word_len, type);
-		new_word = create_new_word(word, type);
-		append_node(head, new_word); // TO DO
-		// printf("word : %s\n", new_word->word); // Debug before append_node
-		// printf("word type : %d\n", new_word->word_type);
-		free(word);
-		end = start + count_word_len;
-		start = end;
+			process_token(&start, head);
 	}
 }
 

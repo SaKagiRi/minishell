@@ -6,7 +6,7 @@
 /*   By: gyeepach <gyeepach@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 06:01:47 by knakto            #+#    #+#             */
-/*   Updated: 2025/04/19 20:27:16 by gyeepach         ###   ########.fr       */
+/*   Updated: 2025/04/20 21:25:53 by gyeepach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,17 +136,6 @@ void print_word_list(t_word_struct **head)
         *head = (*head)->next_word;
     }
 }
-void clear_word_list(t_word_struct *word_list) 
-{
-    t_word_struct *tmp;
-    while (word_list)
-    {
-        tmp = word_list->next_word;
-        free(word_list->word);
-        free(word_list);
-        word_list = tmp;
-    }
-}
 
 void	get_line(void)
 {
@@ -169,6 +158,13 @@ void	get_line(void)
 		printf("===== Token List =====\n");
         print_word_list(&word_struct);
         printf("======================\n");
+		clear_word_list(word_struct);
+		word_struct = NULL;
+		// get_cmd(line);
+		// process();
+		// clear_t_process();
+		free(path);
+		free(line);
 		// จริงๆจะเช็ค syntax ด้วยก็ได้ เพราะ มันมีเคส ที่ มี " ติดมาตัวท้ายด้วย
 		// ตัวอย่าง
 		// /real_minishell_v3> ads "asd"""asdas"
@@ -179,11 +175,6 @@ void	get_line(void)
 		// word : asdas", type : 0
 		// ======================
 		// ตามนี้
-		// clear_word_list(word_struct);
-		// get_cmd(line);
-		// process();
-		// clear_t_process();
-		free(path);
 	}
 }
 

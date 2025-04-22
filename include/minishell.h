@@ -6,7 +6,7 @@
 /*   By: gyeepach <gyeepach@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 21:05:40 by knakto            #+#    #+#             */
-/*   Updated: 2025/04/19 20:29:07 by gyeepach         ###   ########.fr       */
+/*   Updated: 2025/04/21 21:38:55 by gyeepach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,10 @@ int		ft_isquote(int c);
 char 	*extract_input_word(char *start, int len, t_word_type type);
 int		ft_isoperator(char *str);
 void	append_node(t_word_struct **head, t_word_struct *new_node);
-void free_word_list(t_word_struct **head);
+void	clear_word_list(t_word_struct *word_list);
+int		get_word_len(char *start, t_word_type type);
+t_word_type	get_word_type(char *start);
+// void 	clear_word_list(t_word_struct **word_list);
 // int		word_len_in_quote(char *start);
 
 #endif
