@@ -26,7 +26,7 @@ EXEC_FILE		= exec.c heredoc.c redirect.c clear.c get_t.c process.c
 #------------[PARSER]
 PARSER			= $(addprefix $(PARSER_PATH)/, $(PARSER_FILE))
 PARSER_PATH		= parser
-PARSER_FILE		= extract.c extract_utils.c
+PARSER_FILE		= extract.c extract_utils.c extract_utils2.c
 #------------[BUILTIN]
 BUILTIN			= $(addprefix $(BUILTIN_PATH)/, $(BUILTIN_FILE))
 BUILTIN_PATH	= builtin

@@ -6,7 +6,7 @@
 /*   By: gyeepach <gyeepach@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 06:01:47 by knakto            #+#    #+#             */
-/*   Updated: 2025/04/20 21:25:53 by gyeepach         ###   ########.fr       */
+/*   Updated: 2025/04/26 22:38:18 by gyeepach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,36 @@ t_process	*ft_new_proc(char **cmd, t_redirect *re)
 	proc->next = NULL;
 	return (proc);
 }
+
+// int	main()
+// {
+// 	int	code;
+// 	int	temp_code;
+// 	int	pid;
+// 	int	pid_temp;
+
+// 	// while
+// 	pid = fork();
+// 	if (pid == 0)
+// 	{
+// 		exit(0);
+// 	}
+// 	pid = fork();
+// 	{
+// 		exit(1);
+// 	}
+// 	// while
+// 	pid_temp = wait(&temp_code);
+// 	if (pid_temp == pid)
+// 	{
+// 		code = temp_code;
+// 	}
+// 	pid_temp = wait(&temp_code);
+// 	if (pid_temp == pid)
+// 	{
+// 		code = temp_code;
+// 	}
+// }
 
 // void	while_ft(t_redirect *re)
 // {
@@ -130,11 +160,11 @@ int	check_cd(void)
 }
 void print_word_list(t_word_struct **head)
 {
-    while (*head)
-    {
-        printf("word : %s, type : %d\n", (*head)->word, (*head)->word_type);
-        *head = (*head)->next_word;
-    }
+	while (*head)
+	{
+		printf("word : %s, type : %d\n", (*head)->word, (*head)->word_type);
+		*head = (*head)->next_word;
+	}
 }
 
 void	get_line(void)
@@ -153,18 +183,21 @@ void	get_line(void)
 		line = readline(path);
 		if (!line)
 			return ;
-		string_extraction(line, &word_struct);
+		// syntax furnction
+		syntax_check(line);
+		printf("syntax is correct\n");
+		// string_extraction(line, &word_struct);
 		// deug print
-		printf("===== Token List =====\n");
-        print_word_list(&word_struct);
-        printf("======================\n");
-		clear_word_list(word_struct);
-		word_struct = NULL;
+		// printf("===== Token List =====\n");
+		// print_word_list(&word_struct);
+		// printf("======================\n");
+		// clear_word_list(word_struct);
+		// word_struct = NULL;
 		// get_cmd(line);
 		// process();
 		// clear_t_process();
-		free(path);
-		free(line);
+		// free(path);
+		// free(line);
 		// จริงๆจะเช็ค syntax ด้วยก็ได้ เพราะ มันมีเคส ที่ มี " ติดมาตัวท้ายด้วย
 		// ตัวอย่าง
 		// /real_minishell_v3> ads "asd"""asdas"
@@ -192,11 +225,6 @@ void	get_line(void)
 // NOTE: 
 int	main(int c, char **v, char **envp)
 {
-	t_redirect	*re;
-	t_process	*proc;
-	int			fd;
-	char		*line;
-	char		*hah;
 
 	// *env() = envp;
 	init_env(envp);
