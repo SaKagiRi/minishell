@@ -6,7 +6,7 @@
 /*   By: gyeepach <gyeepach@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 21:05:40 by knakto            #+#    #+#             */
-/*   Updated: 2025/04/26 23:25:01 by gyeepach         ###   ########.fr       */
+/*   Updated: 2025/04/30 20:42:47 by gyeepach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ void	clear_word_list(t_word_struct *word_list);
 int		get_word_len(char *start, t_word_type type);
 t_word_type	get_word_type(char *start);
 void	syntax_check(char *line);
-void	valid_pipe(char *line);
 // void 	clear_word_list(t_word_struct **word_list);
 // int		word_len_in_quote(char *start);
 

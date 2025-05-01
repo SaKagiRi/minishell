@@ -6,24 +6,31 @@
 /*   By: gyeepach <gyeepach@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 17:11:02 by gyeepach          #+#    #+#             */
-/*   Updated: 2025/04/26 23:56:37 by gyeepach         ###   ########.fr       */
+/*   Updated: 2025/04/30 20:44:50 by gyeepach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	valid_pipe(char *line)
+void	valid_pipe(char *start, char *line)
 {
-	int	valid_pipe;
+	char	*prev;
+	char	*next;
 
-	valid_pipe = 0;
-	// while ()
-	//{
-		
-	//}
-	if (valid_pipe == 1)
+	prev = start - 1;
+	while (prev >= line && ft_isspace(*prev))
+		prev--;
+	if (prev < line || *prev == '|')
 	{
-		printf("syntax error\n");
+		printf("syntax error near '|'\n");
+		exit(1);
+	}
+	next = start + 1;
+	while (*next && ft_isspace(*next))
+		next++;
+	if (*next == '\0' || *next == '|')
+	{
+		printf("syntax error near '|'\n");
 		exit(1);
 	}
 }
@@ -42,7 +49,7 @@ void	syntax_check(char *line)
 		if (*start == '|'
 			&& valid_double == 0
 			&& valid_single == 0)
-			valid_pipe(*start);
+			valid_pipe(start, line);
 		if (*start == '\''
 			&& valid_double == 0)
 			valid_single = !valid_single;
