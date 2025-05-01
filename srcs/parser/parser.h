@@ -6,7 +6,7 @@
 /*   By: gyeepach <gyeepach@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 22:01:45 by gyeepach          #+#    #+#             */
-/*   Updated: 2025/04/30 20:42:29 by gyeepach         ###   ########.fr       */
+/*   Updated: 2025/05/01 20:25:51 by gyeepach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,11 @@ typedef enum e_word_type
 	SINGLE_QUOTE, // 1
 	DOUBLE_QUOTE, // 2
 	EXPAND, // 3
-	OPERATOR, // 4
+	READ, // 4
+	HEREDOC, // 5
+	WRITE, // 6
+	APPEND, // 7
+	PIPE // 8
 } t_word_type;
 
 // static const char *g_word_type_names[] = {
@@ -59,6 +63,8 @@ void	clear_word_list(t_word_struct *word_list);
 int		get_word_len(char *start, t_word_type type);
 t_word_type	get_word_type(char *start);
 void	valid_pipe(char *start, char *line);
+void	syntax_check(char *line);
+t_word_type	def_operator(char *str);
 // void 	clear_word_list(t_word_struct **word_list);
 // int		word_len_in_quote(char *start);
 

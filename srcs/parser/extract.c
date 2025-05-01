@@ -6,7 +6,7 @@
 /*   By: gyeepach <gyeepach@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 06:31:39 by gyeepach          #+#    #+#             */
-/*   Updated: 2025/04/21 21:45:26 by gyeepach         ###   ########.fr       */
+/*   Updated: 2025/05/01 20:15:17 by gyeepach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,17 +27,16 @@ void clear_word_list(t_word_struct *word_list)
 t_word_type	get_word_type(char *start)
 {
 	if (ft_isoperator(start))
-		return (OPERATOR);
+		return (def_operator(start));
 	else if (ft_isquote(*start))
 		return sing_or_double(start);
 	else
+		// check inside of word first
 		return (CMD);
 }
 int	get_word_len(char *start, t_word_type type)
 {
-	if (type == OPERATOR)
-		return word_len(start);
-	else if (type == SINGLE_QUOTE || type == DOUBLE_QUOTE)
+	if (type == SINGLE_QUOTE || type == DOUBLE_QUOTE)
 		return word_len_inquote(start, type);
 	else
 		return word_len(start);

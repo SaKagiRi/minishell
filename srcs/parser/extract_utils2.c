@@ -6,7 +6,7 @@
 /*   By: gyeepach <gyeepach@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 17:11:02 by gyeepach          #+#    #+#             */
-/*   Updated: 2025/04/30 20:44:50 by gyeepach         ###   ########.fr       */
+/*   Updated: 2025/05/01 20:53:21 by gyeepach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,4 +64,36 @@ void	syntax_check(char *line)
 		printf("syntax error\n");
 		exit(1);
 	}
+}
+
+int	word_len(char *start)
+{
+	char	*end;
+
+	end = start;
+	while (*end && !ft_isspace(*end))
+		// && !ft_isoperator(end))
+		end++;
+	return (end - start);
+}
+
+int	word_len_inquote(char *start, t_word_type type)
+{
+	char 	*end;
+	int		word_len;
+
+	word_len = 0;
+	end = start + 1;
+	if (type == SINGLE_MATCH)
+	{
+		while (*end && *end != '\'')
+			end++;
+	}
+	else if (type == DOUBLE_QUOTE)
+	{
+		while (*end && *end != '\"')
+			end++;
+	}
+	word_len = end - start + 1;
+	return (word_len);
 }

@@ -6,7 +6,7 @@
 /*   By: gyeepach <gyeepach@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 06:01:47 by knakto            #+#    #+#             */
-/*   Updated: 2025/04/26 22:38:18 by gyeepach         ###   ########.fr       */
+/*   Updated: 2025/05/01 19:33:45 by gyeepach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,64 @@ t_process	*ft_new_proc(char **cmd, t_redirect *re)
 // 			// }
 // 			// unlink(re->value);
 // 			// free(re->value);
+// 			// free(re);// int	main()
+// {
+// 	int	code;
+// 	int	temp_code;
+// 	int	pid;
+// 	int	pid_temp;
+
+// 	// while
+// 	pid = fork();
+// 	if (pid == 0)
+// 	{
+// 		exit(0);
+// 	}
+// 	pid = fork();
+// 	{
+// 		exit(1);
+// 	}
+// 	// while
+// 	pid_temp = wait(&temp_code);
+// 	if (pid_temp == pid)
+// 	{
+// 		code = temp_code;
+// 	}
+// 	pid_temp = wait(&temp_code);
+// 	if (pid_temp == pid)
+// 	{
+// 		code = temp_code;
+// 	}
+// }
+
+// void	while_ft(t_redirect *re)
+// {
+// 	int	fd;
+//
+// 	while (re)
+// 	{
+// 		if (re->type == HERE_DOC)
+// 		{
+// 			ft_heredoc(re);
+// 			// fd = open(re->value, O_RDONLY);
+// 			// if (fd < 0)
+// 			// {
+// 			// 	pnf("Error: fd\n");
+// 			// 	return 1;
+// 			// }
+// 			// line = get_next_line(fd);
+// 			// while (line)
+// 			// {
+// 			// 	pnf("%s", line);
+// 			// 	free(line);
+// 			// 	line = get_next_line(fd);
+// 			// }
+// 			// unlink(re->value);
+// 			// free(re->value);
 // 			// free(re);
+// 		}
+// 		re = re->next;
+// 	}
 // 		}
 // 		re = re->next;
 // 	}
@@ -172,7 +229,7 @@ void	get_line(void)
 	char	*line;
 	char	get_path[1024];
 	char	*path;
-	t_word_struct *word_struct;
+	t_word_struct	*word_struct;
 
 	word_struct = NULL;
 	while (is_exit(0))
@@ -183,15 +240,12 @@ void	get_line(void)
 		line = readline(path);
 		if (!line)
 			return ;
-		// syntax furnction
 		syntax_check(line);
 		printf("syntax is correct\n");
-		// string_extraction(line, &word_struct);
-		// deug print
-		// printf("===== Token List =====\n");
-		// print_word_list(&word_struct);
-		// printf("======================\n");
-		// clear_word_list(word_struct);
+		string_extraction(line, &word_struct);
+		printf("===== Token List =====\n");
+		print_word_list(&word_struct);
+		printf("======================\n");
 		// word_struct = NULL;
 		// get_cmd(line);
 		// process();
@@ -208,6 +262,7 @@ void	get_line(void)
 		// word : asdas", type : 0
 		// ======================
 		// ตามนี้
+		clear_word_list(word_struct);
 	}
 }
 
@@ -234,39 +289,3 @@ int	main(int c, char **v, char **envp)
 	// process();
 	// clear_t_process();
 }
-
-
-
-//ตัวนี้จะลองเล่นๆก็ได้ เสร็จแค่ sigaction
-// int	main(int c, char **v, char **env)
-// {
-// 	char	*user_input;
-// 	// char	**split_line;
-	
-
-// 	init(c, v, env);
-// 	while (1)
-// 	{
-// 		set_sig_bind_key();
-// 		user_input = readline("minishell>");
-// 		if (user_input != NULL)
-// 			printf("line = %s\n", user_input);
-// 		add_history(user_input);
-// 		if (user_input == NULL)
-// 		{
-// 			user_input = ft_strdup("exit");
-// 			printf("line = %s\n", user_input);
-// 			break ;
-// 		}
-// 		// execution part
-// 	}
-// 	return (0);
-// }
-
-
-//ตัวหลัก
-// int	main(int c, char **v, char **env)
-// {
-// 	init_clone_env(env);
-// 	print_env();
-// }
