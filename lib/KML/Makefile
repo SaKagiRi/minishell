@@ -8,7 +8,7 @@ CFLAGS		= $(DEBUG_FLAGS) $(W_FLAGS)
 DEBUG_FLAGS	= -g3
 W_FLAGS		= -Wall -Wextra -Werror
 #------------[OBJECT_AND_SOURCE]
-SRC			= $(addprefix srcs/, $(FILE))
+SRC			= $(addprefix srcs/, $(FILE)) #ติด wildcard หรือ เปล่า ???
 OBJ			= $(SRC:%.c=%.o)
 #------------[ROOT_FILES]
 FILE		= $(DIGIT) $(STRING) $(CHARACTER) $(MEMORY) $(PRINT) $(LINKED_LIST) $(GET_NEXT_LINE)

@@ -13,12 +13,16 @@ LIBFT_FILE	= $(LIBFT_DIR)/kml.a
 SRC			= $(addprefix srcs/, $(FILE))
 OBJ			= $(SRC:.c=.o)
 #------------[ROOT_FILES]
-FILE		= $(MAIN) $(INIT) $(PROCESS) $(EXEC) $(ENV) $(BUILTIN) $(EXIT)
+FILE		= $(MAIN) $(INIT) $(EXEC) $(PARSER) $(ENV) $(BUILTIN) $(EXIT) $(PROCESS)
 #------------[SUBFILES]
 #------------[MAIN]
 MAIN			= $(addprefix $(MAIN_PATH)/, $(MAIN_FILE))
 MAIN_PATH		= main
-MAIN_FILE		= minishell.c get_t.c
+MAIN_FILE		= minishell.c get_t.c signal_bind.c
+#------------[PARSER]
+PARSER			= $(addprefix $(PARSER_PATH)/, $(PARSER_FILE))
+PARSER_PATH		= parser
+PARSER_FILE		= extract.c extract_utils.c extract_utils2.c 
 #------------[PROCESSUTION]
 PROCESS			= $(addprefix $(PROCESS_PATH)/, $(PROCESS_FILE))
 PROCESS_PATH		= process
@@ -42,7 +46,7 @@ EXIT_FILE		= exit.c get_t.c
 #------------[PROCESS]
 all: lib $(NAME)
 $(NAME): $(OBJ) | $(BUILD_DIR)
-		@$(CC) $(CFLAGS) $(OBJ) $(LIBFT_FILE) $(HEADER) -o $@
+		@$(CC) $(CFLAGS) $(OBJ) $(LIBFT_FILE) $(HEADER) -o $@ -lreadline
 		@printf "\033[38;5;46m\033[1m⟪ Complete ⟫\033[0m\n"
 %.o: %.c Makefile
 	@printf "\033[38;5;226;1m"

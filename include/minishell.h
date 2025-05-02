@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: knakto <knakto@student.42bangkok.com>      +#+  +:+       +#+        */
+/*   By: gyeepach <gyeepach@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 21:05:40 by knakto            #+#    #+#             */
 /*   Updated: 2025/04/29 04:29:34 by knakto           ###   ########.fr       */
@@ -20,5 +20,6 @@
 # include "../srcs/environment_variables/env.h"
 # include "../srcs/process/process.h"
 # include "../srcs/exit/exit.h"
+#include "../srcs/parser/parser.h"
 
 #endif

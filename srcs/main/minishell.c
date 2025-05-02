@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: knakto <knakto@student.42bangkok.com>      +#+  +:+       +#+        */
+/*   By: gyeepach <gyeepach@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 06:01:47 by knakto            #+#    #+#             */
 /*   Updated: 2025/05/02 13:14:07 by knakto           ###   ########.fr       */
@@ -11,12 +11,15 @@
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+#include "../parser/parser.h"
+#include <stdio.h>
+#include <readline/readline.h>
+#include <readline/history.h>
 #include <fcntl.h>
 #include <stdlib.h>
 #include <strings.h>
-# include <stdio.h>
-# include <readline/readline.h>
-# include <readline/history.h>
+
+volatile sig_atomic_t	g_signal = 0;
 
 t_redirect	*ft_new_re(char *eof, int type)
 {
@@ -41,6 +44,90 @@ t_process	*ft_new_proc(char **cmd, t_redirect *re)
 	proc->next = NULL;
 	return (proc);
 }
+
+// int	main()
+// {
+// 	int	code;
+// 	int	temp_code;
+// 	int	pid;
+// 	int	pid_temp;
+
+// 	// while
+// 	pid = fork();
+// 	if (pid == 0)
+// 	{
+// 		exit(0);
+// 	}
+// 	pid = fork();
+// 	{
+// 		exit(1);
+// 	}
+// 	// while
+// 	pid_temp = wait(&temp_code);
+// 	if (pid_temp == pid)
+// 	{
+// 		code = temp_code;
+// 	}
+// 	pid_temp = wait(&temp_code);
+// 	if (pid_temp == pid)
+// 	{
+// 		code = temp_code;
+// 	}
+// }
+
+// void	while_ft(t_redirect *re)
+// {
+// 	int	fd;
+//
+// 	while (re)
+// 	{
+// 		if (re->type == HERE_DOC)
+// 		{
+// 			ft_heredoc(re);
+// 			// fd = open(re->value, O_RDONLY);
+// 			// if (fd < 0)
+// 			// {
+// 			// 	pnf("Error: fd\n");
+// 			// 	return 1;
+// 			// }
+// 			// line = get_next_line(fd);
+// 			// while (line)
+// 			// {
+// 			// 	pnf("%s", line);
+// 			// 	free(line);
+// 			// 	line = get_next_line(fd);
+// 			// }
+// 			// unlink(re->value);
+// 			// free(re->value);
+// 			// free(re);// int	main()
+// {
+// 	int	code;
+// 	int	temp_code;
+// 	int	pid;
+// 	int	pid_temp;
+
+// 	// while
+// 	pid = fork();
+// 	if (pid == 0)
+// 	{
+// 		exit(0);
+// 	}
+// 	pid = fork();
+// 	{
+// 		exit(1);
+// 	}
+// 	// while
+// 	pid_temp = wait(&temp_code);
+// 	if (pid_temp == pid)
+// 	{
+// 		code = temp_code;
+// 	}
+// 	pid_temp = wait(&temp_code);
+// 	if (pid_temp == pid)
+// 	{
+// 		code = temp_code;
+// 	}
+// }
 
 // void	while_ft(t_redirect *re)
 // {
@@ -70,6 +157,9 @@ t_process	*ft_new_proc(char **cmd, t_redirect *re)
 // 		}
 // 		re = re->next;
 // 	}
+// 		}
+// 		re = re->next;
+// 	}
 
 void	ft_add_proc(t_process **proc, t_process *new)
 {
@@ -82,7 +172,10 @@ void	ft_add_proc(t_process **proc, t_process *new)
 	}
 	node = *proc;
 	while (node->next)
+	{
+		printf("%s\n", *node->cmd);
 		node = node->next;
+	}
 	node->next = new;
 }
 
@@ -123,52 +216,66 @@ int	check_cd(void)
 	}
 	return (0);
 }
-
-void	print_debug(void)
+void print_word_list(t_word_struct **head)
 {
-	t_process *proc;
-	int			i;
-
-	proc = *get_t_process();
-	while (proc)
+	while (*head)
 	{
-		i = 0;
-		pnf("----------------------cmd----------------------\n");
-		while (proc->cmd[i])
-		{
-			pnf("[%s]\n", proc->cmd[i]);
-			i++;
-		}
-		proc = proc->next;
+		printf("word : %s, type : %d\n", (*head)->word, (*head)->word_type);
+		*head = (*head)->next_word;
 	}
 }
 
 void	get_line(void)
 {
-	int		fd_in;
 	char	*line;
 	char	get_path[1024];
 	char	*path;
+	t_word_struct	*word_struct;
+	t_process		*process;
 
-	fd_in = dup(0);
+	word_struct = NULL;
 	while (is_exit(0))
 	{
-		dup2(fd_in, 0);
 		if (!getcwd(get_path, sizeof(get_path)))
 			return ;
 		path = ft_strjoin(ft_strrchr(get_path, '/'), "> ");
 		line = readline(path);
 		if (!line)
 			return ;
-		get_cmd(line);
-		print_debug();
-		process();
-		free(path);
-		break ;
+		if (!syntax_check(line))
+			continue ;
+		//Debug_syntax print
+		printf("syntax is correct\n");
+		string_extraction(line, &word_struct);
+		// word_to_process(&word_struct, &process);
+		//Debug_string_extraction print
+		printf("===== Token List =====\n");
+		print_word_list(&word_struct);
+		printf("======================\n");
+		// word_struct = NULL;
+		// get_cmd(line);
+		// process();
+		// clear_t_process();
+		// free(path);
+		// free(line);
+		// จริงๆจะเช็ค syntax ด้วยก็ได้ เพราะ มันมีเคส ที่ มี " ติดมาตัวท้ายด้วย
+		// ตัวอย่าง
+		// /real_minishell_v3> ads "asd"""asdas"
+		// ===== Token List =====
+		// word : ads, type : 0
+		// word : asd, type : 2
+		// word : , type : 2
+		// word : asdas", type : 0
+		// ======================
+		// ตามนี้
+		clear_word_list(word_struct);
 	}
 }
 
 // NOTE: 
+// -sort export, export unset in other case
+// -error case
+// -exit code
 // -memory leak
 // NOTE: day 15/4 5:44 Updated
 // -finish ft_echo, ft_env, ft_export, ft_pwd, ft_unset and add redirect to it
@@ -179,14 +286,17 @@ void	get_line(void)
 // NOTE: 
 int	main(int c, char **v, char **envp)
 {
-	char	*env;
 
-	init_env(envp);
-	get_line();
-	// env = get_value(NULL);
-	// // print_env();
-	// printf("item->>>[%s]\n", env);
-	// if (env)
-	// 	free(env);
-	clear_env();
+	char	**cmd;
+
+	
+	// *env() = envp;
+	// init_env(envp);
+	// print_env();
+	// get_cmd("cd ..");
+	// get_line();
+	// cmd = ft_split("ls", ' ');
+	// *get_t_process() = ft_new_proc(cmd, NULL);
+	// process();
+	// clear_t_process();
 }
