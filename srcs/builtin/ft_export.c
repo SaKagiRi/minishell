@@ -6,7 +6,11 @@
 /*   By: knakto <knakto@student.42bangkok.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 05:04:28 by knakto            #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2025/04/15 05:22:01 by knakto           ###   ########.fr       */
+=======
+/*   Updated: 2025/04/29 19:09:21 by knakto           ###   ########.fr       */
+>>>>>>> origin
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +49,11 @@ void	ft_export(char **arg)
 	if (len_arg(arg) == 1)
 	{
 		print_env_list();
+<<<<<<< HEAD
 		return ;
+=======
+		exit(0);
+>>>>>>> origin
 	}
 	set_export(arg);
 }

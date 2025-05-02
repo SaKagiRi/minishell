@@ -1,48 +1,54 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-<<<<<<< HEAD
-<<<<<<<< HEAD:srcs/builtin/ft_exit.c
-=======
->>>>>>> origin
-/*   ft_exit.c                                          :+:      :+:    :+:   */
+<<<<<<<< HEAD:srcs/builtin/ft_pwd.c
+/*   ft_pwd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: knakto <knakto@student.42bangkok.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/17 01:41:26 by knakto            #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2025/04/17 03:12:52 by knakto           ###   ########.fr       */
-=======
-/*   Updated: 2025/04/29 19:14:08 by knakto           ###   ########.fr       */
->>>>>>> origin
+/*   Created: 2025/04/15 01:55:23 by knakto            #+#    #+#             */
+/*   Updated: 2025/04/15 04:18:31 by knakto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtin.h"
-#include <stdio.h>
 
-void	ft_exit(t_process *proc)
+void	ft_pwd(char **arg)
 {
-	// is_exit(1);
-<<<<<<< HEAD
-	printf("%d\n", *exnum() / 256);
+	char	thispath[1024];
+
+	if (len_arg(arg) != 1)
+	{
+		pnf_fd(2, "bash: pwd: too many arguments\n");
+		return ;
+	}
+	if (!getcwd(thispath, sizeof(thispath)))
+		return ;
+	pnf("%s\n", thispath);
 ========
-/*   clear.c                                            :+:      :+:    :+:   */
+/*   clear_env.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: knakto <knakto@student.42bangkok.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/27 00:48:11 by knakto            #+#    #+#             */
-/*   Updated: 2025/04/27 01:35:34 by knakto           ###   ########.fr       */
+/*   Created: 2025/04/29 19:23:17 by knakto            #+#    #+#             */
+/*   Updated: 2025/04/29 19:27:37 by knakto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "exec.h"
+#include "env.h"
 
-void	clear_execution_failed(char **cmd, char **env)
+void	clear_env(void)
 {
-	free_split(cmd);
->>>>>>>> origin:srcs/process/exec/clear.c
-=======
-	printf("%d\n", *get_code() / 256);
->>>>>>> origin
+	t_env	*envp;
+	t_env	*temp;
+	
+	envp = *get_t_env();
+	while (envp)
+	{
+		temp = envp;
+		envp = envp->next;
+		del(temp);
+	}
+	free_split(env()[0]);
+>>>>>>>> origin:srcs/environment_variables/clear_env.c
 }

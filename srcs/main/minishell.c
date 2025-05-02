@@ -6,7 +6,11 @@
 /*   By: knakto <knakto@student.42bangkok.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 06:01:47 by knakto            #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2025/04/17 02:11:00 by knakto           ###   ########.fr       */
+=======
+/*   Updated: 2025/05/02 13:14:07 by knakto           ###   ########.fr       */
+>>>>>>> origin
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +18,12 @@
 #include <fcntl.h>
 #include <stdlib.h>
 #include <strings.h>
+<<<<<<< HEAD
+=======
+# include <stdio.h>
+# include <readline/readline.h>
+# include <readline/history.h>
+>>>>>>> origin
 
 t_redirect	*ft_new_re(char *eof, int type)
 {
@@ -121,14 +131,46 @@ int	check_cd(void)
 	return (0);
 }
 
+<<<<<<< HEAD
 void	get_line(void)
 {
+=======
+void	print_debug(void)
+{
+	t_process *proc;
+	int			i;
+
+	proc = *get_t_process();
+	while (proc)
+	{
+		i = 0;
+		pnf("----------------------cmd----------------------\n");
+		while (proc->cmd[i])
+		{
+			pnf("[%s]\n", proc->cmd[i]);
+			i++;
+		}
+		proc = proc->next;
+	}
+}
+
+void	get_line(void)
+{
+	int		fd_in;
+>>>>>>> origin
 	char	*line;
 	char	get_path[1024];
 	char	*path;
 
+<<<<<<< HEAD
 	while (is_exit(0))
 	{
+=======
+	fd_in = dup(0);
+	while (is_exit(0))
+	{
+		dup2(fd_in, 0);
+>>>>>>> origin
 		if (!getcwd(get_path, sizeof(get_path)))
 			return ;
 		path = ft_strjoin(ft_strrchr(get_path, '/'), "> ");
@@ -136,16 +178,26 @@ void	get_line(void)
 		if (!line)
 			return ;
 		get_cmd(line);
+<<<<<<< HEAD
 		process();
 		clear_t_process();
 		free(path);
+=======
+		print_debug();
+		process();
+		free(path);
+		break ;
+>>>>>>> origin
 	}
 }
 
 // NOTE: 
+<<<<<<< HEAD
 // -sort export, export unset in other case
 // -error case
 // -exit code
+=======
+>>>>>>> origin
 // -memory leak
 // NOTE: day 15/4 5:44 Updated
 // -finish ft_echo, ft_env, ft_export, ft_pwd, ft_unset and add redirect to it
@@ -156,6 +208,7 @@ void	get_line(void)
 // NOTE: 
 int	main(int c, char **v, char **envp)
 {
+<<<<<<< HEAD
 	t_redirect	*re;
 	t_process	*proc;
 	int			fd;
@@ -169,4 +222,16 @@ int	main(int c, char **v, char **envp)
 	get_line();
 	// process();
 	// clear_t_process();
+=======
+	char	*env;
+
+	init_env(envp);
+	get_line();
+	// env = get_value(NULL);
+	// // print_env();
+	// printf("item->>>[%s]\n", env);
+	// if (env)
+	// 	free(env);
+	clear_env();
+>>>>>>> origin
 }

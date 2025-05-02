@@ -6,7 +6,11 @@
 /*   By: knakto <knakto@student.42bangkok.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 02:22:59 by knakto            #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2025/04/16 01:16:54 by knakto           ###   ########.fr       */
+=======
+/*   Updated: 2025/05/01 23:38:47 by knakto           ###   ########.fr       */
+>>>>>>> origin
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +40,11 @@ void	add_env(char *key, char *value);
 int		search(char *key);
 void	del_env(char *key);
 void	set_value_env(char *key, char *value);
+<<<<<<< HEAD
+=======
+void	del(t_env *d);
+void	clear_env(void);
+char	*get_value(char *key);
+>>>>>>> origin
 
 #endif

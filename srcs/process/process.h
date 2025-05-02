@@ -1,29 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec.h                                             :+:      :+:    :+:   */
+/*   process.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: knakto <knakto@student.42bangkok.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 18:57:58 by knakto            #+#    #+#             */
-/*   Updated: 2025/04/16 01:16:46 by knakto           ###   ########.fr       */
+/*   Updated: 2025/05/02 00:07:21 by knakto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EXEC_H
-# define EXEC_H
+#ifndef PROCESS_H 
+# define PROCESS_H
 
-# include <stdlib.h>
 # include <stdbool.h>
-# include <fcntl.h>
-# include <stdlib.h>
-# include <unistd.h>
 # include <sys/wait.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-# include "../../lib/KML/include/kml.h"
 # include "../environment_variables/env.h"
-# include "../exit/exit.h"
+# include "exec/exec.h"
+# include "../../lib/KML/include/kml.h"
 
 typedef enum e_redirect_type
 {
@@ -40,6 +34,43 @@ typedef struct s_redirect
 	struct s_redirect	*next;
 }	t_redirect;
 
+/*
+this struct is init before run all process one node 
+is mean one pipe and redirect can stack multiple redirect 
+pid declare init is 0 and cmd is "malloc" of cmd 
+
+Example
+---
+echo helllo world > b > c | cat Makefie | < b cat
+---
+process
+	cmd	[[echo] [hello world]]
+	redirect
+		type	WRITE_FILE
+		value	b
+		next
+	redirect
+		type	WRITE_FILE
+		value	c
+		next	NULL
+	pid 0
+next
+process
+	cmd [[cat] [Makefile]]
+	redirect
+		NULL
+	pid	0
+next
+process
+	cmd	[[cat]]
+	redirect
+		type	READ_FILE
+		value	b
+		next	NULL
+	pid	0
+next	NULL
+---
+*/
 typedef struct s_process
 {
 	char				**cmd;
@@ -57,6 +88,7 @@ void		clear_t_process(void);
 void		redirect(t_process *proc);
 void		process(void);
 int			builtin(t_process *proc);
+int			check_builtin(t_process *proc);
 
 # define HEREDOC_ERR "\nbash: warning: here-document at line delimited \
 by end-of-file (wanted `%s')\n"

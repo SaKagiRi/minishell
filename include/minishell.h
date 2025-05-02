@@ -6,7 +6,11 @@
 /*   By: knakto <knakto@student.42bangkok.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 21:05:40 by knakto            #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2025/04/16 01:17:16 by knakto           ###   ########.fr       */
+=======
+/*   Updated: 2025/04/29 04:29:34 by knakto           ###   ########.fr       */
+>>>>>>> origin
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +22,11 @@
 # include <stdlib.h>
 # include "../lib/KML/include/kml.h"
 # include "../srcs/environment_variables/env.h"
+<<<<<<< HEAD
 # include "../srcs/execution/exec.h"
+=======
+# include "../srcs/process/process.h"
+>>>>>>> origin
 # include "../srcs/exit/exit.h"
 
 #endif

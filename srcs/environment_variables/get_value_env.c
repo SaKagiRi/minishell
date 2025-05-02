@@ -1,34 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_env.c                                           :+:      :+:    :+:   */
+/*   get_value_env.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: knakto <knakto@student.42bangkok.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/15 03:38:45 by knakto            #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2025/04/15 05:26:48 by knakto           ###   ########.fr       */
-=======
-/*   Updated: 2025/04/29 19:09:36 by knakto           ###   ########.fr       */
->>>>>>> origin
+/*   Created: 2025/05/01 23:34:55 by knakto            #+#    #+#             */
+/*   Updated: 2025/05/01 23:43:29 by knakto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtin.h"
+#include "env.h"
 
-void	ft_env(char **arg)
+char	*get_value(char *key)
 {
-	if (len_arg(arg) != 1)
+	char	*value;
+	t_env	*env;
+
+	env =  *get_t_env();
+	if (!key || !search(key))
+		return (NULL);
+	while (env)
 	{
-		pnf_fd(2, "bash: env: too many arguments\n");
-<<<<<<< HEAD
-		return ;
+		if (!ft_strncmp(key, env->key, ft_strlen(key)))
+			if (env->value)
+				return (ft_strdup(env->value));
+		env = env->next;
 	}
-	print_env();
-=======
-		exit(1);
-	}
-	print_env();
-	exit(0);
->>>>>>> origin
+	return (NULL);
 }

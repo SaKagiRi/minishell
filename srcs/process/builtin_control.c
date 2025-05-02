@@ -1,34 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_env.c                                           :+:      :+:    :+:   */
+/*   builtin_control.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: knakto <knakto@student.42bangkok.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/15 03:38:45 by knakto            #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2025/04/15 05:26:48 by knakto           ###   ########.fr       */
-=======
-/*   Updated: 2025/04/29 19:09:36 by knakto           ###   ########.fr       */
->>>>>>> origin
+/*   Created: 2025/04/29 18:58:29 by knakto            #+#    #+#             */
+/*   Updated: 2025/04/29 19:00:04 by knakto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtin.h"
+#include "process.h"
 
-void	ft_env(char **arg)
+int	check_builtin(t_process *proc)
 {
-	if (len_arg(arg) != 1)
+	if (!ft_strncmp(proc->cmd[0], "cd", 3) \
+		|| (!ft_strncmp(proc->cmd[0], "export", 7) && proc->cmd[1]) \
+		|| !ft_strncmp(proc->cmd[0], "unset", 6) \
+		|| !ft_strncmp(proc->cmd[0], "exit", 5))
 	{
-		pnf_fd(2, "bash: env: too many arguments\n");
-<<<<<<< HEAD
-		return ;
+		builtin(proc);
+		return (1);
 	}
-	print_env();
-=======
-		exit(1);
-	}
-	print_env();
-	exit(0);
->>>>>>> origin
+	return (0);
 }

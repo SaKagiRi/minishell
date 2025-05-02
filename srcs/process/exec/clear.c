@@ -1,20 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-<<<<<<< HEAD
 <<<<<<<< HEAD:srcs/builtin/ft_exit.c
-=======
->>>>>>> origin
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: knakto <knakto@student.42bangkok.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 01:41:26 by knakto            #+#    #+#             */
-<<<<<<< HEAD
 /*   Updated: 2025/04/17 03:12:52 by knakto           ###   ########.fr       */
-=======
-/*   Updated: 2025/04/29 19:14:08 by knakto           ###   ########.fr       */
->>>>>>> origin
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +17,6 @@
 void	ft_exit(t_process *proc)
 {
 	// is_exit(1);
-<<<<<<< HEAD
 	printf("%d\n", *exnum() / 256);
 ========
 /*   clear.c                                            :+:      :+:    :+:   */
@@ -42,7 +34,4 @@ void	clear_execution_failed(char **cmd, char **env)
 {
 	free_split(cmd);
 >>>>>>>> origin:srcs/process/exec/clear.c
-=======
-	printf("%d\n", *get_code() / 256);
->>>>>>> origin
 }
