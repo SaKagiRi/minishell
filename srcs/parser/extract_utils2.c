@@ -6,7 +6,7 @@
 /*   By: gyeepach <gyeepach@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 17:11:02 by gyeepach          #+#    #+#             */
-/*   Updated: 2025/05/01 20:53:21 by gyeepach         ###   ########.fr       */
+/*   Updated: 2025/05/02 13:14:36 by gyeepach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	valid_pipe(char *start, char *line)
 	}
 }
 
-void	syntax_check(char *line)
+bool	syntax_check(char *line)
 {
 	int		valid_single;
 	int		valid_double;
@@ -62,8 +62,9 @@ void	syntax_check(char *line)
 		|| valid_single == 1)
 	{
 		printf("syntax error\n");
-		exit(1);
+		return (false);
 	}
+	return (true);
 }
 
 int	word_len(char *start)
@@ -71,8 +72,8 @@ int	word_len(char *start)
 	char	*end;
 
 	end = start;
-	while (*end && !ft_isspace(*end))
-		// && !ft_isoperator(end))
+	while (*end && !ft_isspace(*end)
+		&& !ft_isoperator(end))
 		end++;
 	return (end - start);
 }

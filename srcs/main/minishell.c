@@ -6,7 +6,7 @@
 /*   By: gyeepach <gyeepach@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 06:01:47 by knakto            #+#    #+#             */
-/*   Updated: 2025/05/01 19:33:45 by gyeepach         ###   ########.fr       */
+/*   Updated: 2025/05/02 13:12:26 by gyeepach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -230,6 +230,7 @@ void	get_line(void)
 	char	get_path[1024];
 	char	*path;
 	t_word_struct	*word_struct;
+	t_process		*process;
 
 	word_struct = NULL;
 	while (is_exit(0))
@@ -240,9 +241,13 @@ void	get_line(void)
 		line = readline(path);
 		if (!line)
 			return ;
-		syntax_check(line);
+		if (!syntax_check(line))
+			continue ;
+		//Debug_syntax print
 		printf("syntax is correct\n");
 		string_extraction(line, &word_struct);
+		// word_to_process(&word_struct, &process);
+		//Debug_string_extraction print
 		printf("===== Token List =====\n");
 		print_word_list(&word_struct);
 		printf("======================\n");
@@ -278,14 +283,20 @@ void	get_line(void)
 // -finish shell level in almost all case (dont have grep case and I dont do it lol)
 // -check norm and push update this day
 // NOTE: 
+#include "../execution/exec.h"
 int	main(int c, char **v, char **envp)
 {
 
+	char	**cmd;
+
+	
 	// *env() = envp;
-	init_env(envp);
+	// init_env(envp);
 	// print_env();
 	// get_cmd("cd ..");
-	get_line();
-	// process();
+	// get_line();
+	cmd = ft_split("ls", ' ');
+	*get_t_process() = ft_new_proc(cmd, NULL);
+	process();
 	// clear_t_process();
 }

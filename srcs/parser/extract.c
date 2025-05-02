@@ -6,7 +6,7 @@
 /*   By: gyeepach <gyeepach@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 06:31:39 by gyeepach          #+#    #+#             */
-/*   Updated: 2025/05/01 20:15:17 by gyeepach         ###   ########.fr       */
+/*   Updated: 2025/05/02 10:39:34 by gyeepach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,22 +24,38 @@ void clear_word_list(t_word_struct *word_list)
 		word_list = tmp;
 	}
 }
-t_word_type	get_word_type(char *start)
+t_word_type get_word_type(char *start)
 {
-	if (ft_isoperator(start))
-		return (def_operator(start));
-	else if (ft_isquote(*start))
-		return sing_or_double(start);
-	else
-		// check inside of word first
-		return (CMD);
+
+    if (*start == '<' && *(start + 1) == '<')
+        return (HEREDOC); 
+    if (*start == '>' && *(start + 1) == '>')
+        return (APPEND);
+    if (*start == '|' )
+        return (PIPE);
+    if (*start == '>')
+		return (WRITE);
+	if (*start == '<')
+		return (READ);
+
+    if (ft_isquote(*start))
+        return sing_or_double(start);
+
+    return (CMD);
 }
+
 int	get_word_len(char *start, t_word_type type)
 {
 	if (type == SINGLE_QUOTE || type == DOUBLE_QUOTE)
 		return word_len_inquote(start, type);
+	else if (type == HEREDOC || type == APPEND)
+		return (2);
+	else if (type == WRITE 
+		|| type == READ
+		|| type == PIPE)
+		return (1);
 	else
-		return word_len(start);
+		return (word_len(start));
 }
 
 void	append_node(t_word_struct **head, t_word_struct *new_node)
@@ -55,7 +71,6 @@ void	append_node(t_word_struct **head, t_word_struct *new_node)
 		new_node->next_word = NULL;
 		return ;
 	}
-
 	current = *head;
 	while (current->next_word)
 		current = current->next_word;
@@ -110,21 +125,3 @@ void	string_extraction(char *line, t_word_struct **head)
 			process_token(&start, head);
 	}
 }
-
-// test เพื่อให้ เข้าใจ
-// void	string_extraction(char *line)
-// {
-// 	t_word_struct	word_struct;
-// 	int	i;
-
-// 	i = 0;
-// 	word_struct.word = malloc(strlen(line) + 1);
-// 	while(line[i])
-// 	{
-// 		word_struct.word[i] = line[i];
-// 		printf("char of input by user: %c\n", word_struct.word[i]);
-// 		i++;
-// 	}
-// 	word_struct.word[i] = '\0';
-// 	printf("string fof input by user %s\n", word_struct.word);
-// }
