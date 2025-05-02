@@ -6,11 +6,11 @@
 /*   By: knakto <knakto@student.42bangkok.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 17:11:21 by knakto            #+#    #+#             */
-/*   Updated: 2025/04/17 02:28:10 by knakto           ###   ########.fr       */
+/*   Updated: 2025/04/29 06:24:54 by knakto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "exec.h"
+#include "process.h"
 
 static int	file_in(int *fd, t_redirect *re)
 {
@@ -93,16 +93,25 @@ void	redirect(t_process *proc)
 {
 	int		fd_in;
 	int		fd_out;
+	int		status;
 
 	find_fd(proc->redirect, &fd_in, &fd_out);
-	if (fd_in != 0)
+	status = 1;
+	if (!ft_strncmp(proc->cmd[0], "cd", 3) \
+		|| (!ft_strncmp(proc->cmd[0], "export", 7) && proc->cmd[1]) \
+		|| !ft_strncmp(proc->cmd[0], "unset", 6) \
+		|| !ft_strncmp(proc->cmd[0], "exit", 5))
+		status = 0;
+	if (fd_in != 0 && fd_in > 0)
 	{
-		dup2(fd_in, 0);
+		if (status)
+			dup2(fd_in, 0);
 		close(fd_in);
 	}
-	if (fd_out != 1)
+	if (fd_out != 1 && fd_out > 1)
 	{
-		dup2(fd_out, 1);
+		if (status)
+			dup2(fd_out, 1);
 		close(fd_out);
 	}
 }

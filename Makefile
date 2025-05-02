@@ -13,20 +13,24 @@ LIBFT_FILE	= $(LIBFT_DIR)/kml.a
 SRC			= $(addprefix srcs/, $(FILE))
 OBJ			= $(SRC:.c=.o)
 #------------[ROOT_FILES]
-FILE		= $(MAIN) $(INIT) $(EXEC) $(PARSER) $(ENV) $(BUILTIN) $(EXIT)
+FILE		= $(MAIN) $(INIT) $(EXEC) $(PARSER) $(ENV) $(BUILTIN) $(EXIT) $(PROCESS)
 #------------[SUBFILES]
 #------------[MAIN]
 MAIN			= $(addprefix $(MAIN_PATH)/, $(MAIN_FILE))
 MAIN_PATH		= main
 MAIN_FILE		= minishell.c get_t.c signal_bind.c
-#------------[EXECUTION]
-EXEC			= $(addprefix $(EXEC_PATH)/, $(EXEC_FILE))
-EXEC_PATH		= execution
-EXEC_FILE		= exec.c heredoc.c redirect.c clear.c get_t.c process.c
 #------------[PARSER]
 PARSER			= $(addprefix $(PARSER_PATH)/, $(PARSER_FILE))
 PARSER_PATH		= parser
-PARSER_FILE		= extract.c extract_utils.c extract_utils2.c
+PARSER_FILE		= extract.c extract_utils.c extract_utils2.c 
+#------------[PROCESSUTION]
+PROCESS			= $(addprefix $(PROCESS_PATH)/, $(PROCESS_FILE))
+PROCESS_PATH		= process
+PROCESS_FILE		= heredoc.c redirect.c clear.c get_t.c process.c builtin_control.c
+	#------------[EXECUTION]
+	EXEC			= $(addprefix $(EXEC_PATH)/, $(EXEC_FILE))
+	EXEC_PATH		= $(PROCESS_PATH)/exec
+	EXEC_FILE		= exec.c clear.c access.c
 #------------[BUILTIN]
 BUILTIN			= $(addprefix $(BUILTIN_PATH)/, $(BUILTIN_FILE))
 BUILTIN_PATH	= builtin
@@ -34,11 +38,11 @@ BUILTIN_FILE	= ft_chdir.c builtin.c ft_echo.c ft_pwd.c ft_env.c ft_export.c ft_u
 #------------[ENV]
 ENV				= $(addprefix $(ENV_PATH)/, $(ENV_FILE))
 ENV_PATH		= environment_variables
-ENV_FILE		= get_t.c env_new.c init_env.c print_env.c set_env.c add_env.c del_env.c
+ENV_FILE		= get_t.c env_new.c init_env.c print_env.c set_env.c add_env.c del_env.c clear_env.c get_value_env.c
 #------------[EXIT]
 EXIT			= $(addprefix $(EXIT_PATH)/, $(EXIT_FILE))
 EXIT_PATH		= exit
-EXIT_FILE		= exit.c
+EXIT_FILE		= exit.c get_t.c
 #------------[PROCESS]
 all: lib $(NAME)
 $(NAME): $(OBJ) | $(BUILD_DIR)

@@ -5,16 +5,16 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: knakto <knakto@student.42bangkok.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/12 20:21:47 by knakto            #+#    #+#             */
-/*   Updated: 2025/04/12 20:45:06 by knakto           ###   ########.fr       */
+/*   Created: 2025/04/26 21:41:35 by knakto            #+#    #+#             */
+/*   Updated: 2025/04/29 19:13:50 by knakto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "exec.h"
+#include "exit.h"
 
-t_process	**get_t_process(void)
+int	*get_code(void)
 {
-	static t_process	*process = NULL;
+	static int	status = 0;
 
-	return (&process);
+	return (&status);
 }

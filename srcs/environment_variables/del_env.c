@@ -6,13 +6,13 @@
 /*   By: knakto <knakto@student.42bangkok.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 04:56:17 by knakto            #+#    #+#             */
-/*   Updated: 2025/04/15 05:50:26 by knakto           ###   ########.fr       */
+/*   Updated: 2025/04/29 19:26:24 by knakto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "env.h"
 
-static void	del(t_env *d)
+void	del(t_env *d)
 {
 	free(d->key);
 	if (d->value)

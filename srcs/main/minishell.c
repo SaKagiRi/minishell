@@ -6,11 +6,12 @@
 /*   By: gyeepach <gyeepach@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 06:01:47 by knakto            #+#    #+#             */
-/*   Updated: 2025/05/02 13:12:26 by gyeepach         ###   ########.fr       */
+/*   Updated: 2025/05/02 13:14:07 by knakto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+#include "../parser/parser.h"
 #include <stdio.h>
 #include <readline/readline.h>
 #include <readline/history.h>
@@ -24,8 +25,7 @@ t_redirect	*ft_new_re(char *eof, int type)
 {
 	t_redirect	*re;
 
-	re = malloc(sizeof(t_redirect));
-	re->value = NULL;
+	re = malloc(sizeof(t_redirect)); re->value = NULL;
 	if (eof)
 		re->value = ft_strdup(eof);
 	re->next = NULL;
@@ -284,7 +284,6 @@ void	get_line(void)
 // -finish shell level in almost all case (dont have grep case and I dont do it lol)
 // -check norm and push update this day
 // NOTE: 
-#include "../execution/exec.h"
 int	main(int c, char **v, char **envp)
 {
 
@@ -296,8 +295,8 @@ int	main(int c, char **v, char **envp)
 	// print_env();
 	// get_cmd("cd ..");
 	// get_line();
-	cmd = ft_split("ls", ' ');
-	*get_t_process() = ft_new_proc(cmd, NULL);
-	process();
+	// cmd = ft_split("ls", ' ');
+	// *get_t_process() = ft_new_proc(cmd, NULL);
+	// process();
 	// clear_t_process();
 }

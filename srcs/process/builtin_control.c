@@ -1,42 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   clear.c                                            :+:      :+:    :+:   */
+/*   builtin_control.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: knakto <knakto@student.42bangkok.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/12 19:40:54 by knakto            #+#    #+#             */
-/*   Updated: 2025/04/13 18:11:51 by knakto           ###   ########.fr       */
+/*   Created: 2025/04/29 18:58:29 by knakto            #+#    #+#             */
+/*   Updated: 2025/04/29 19:00:04 by knakto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "exec.h"
+#include "process.h"
 
-void	clear_t_redirect(t_redirect *re)
+int	check_builtin(t_process *proc)
 {
-	t_redirect	*temp;
-
-	while (re)
+	if (!ft_strncmp(proc->cmd[0], "cd", 3) \
+		|| (!ft_strncmp(proc->cmd[0], "export", 7) && proc->cmd[1]) \
+		|| !ft_strncmp(proc->cmd[0], "unset", 6) \
+		|| !ft_strncmp(proc->cmd[0], "exit", 5))
 	{
-		free(re->value);
-		temp = re;
-		re = re->next;
-		free(temp);
+		builtin(proc);
+		return (1);
 	}
-}
-
-void	clear_t_process(void)
-{
-	t_process	*proc;
-	t_process	*temp;
-
-	proc = *get_t_process();
-	while (proc)
-	{
-		free_split(proc->cmd);
-		clear_t_redirect(proc->redirect);
-		temp = proc;
-		proc = proc->next;
-		free(temp);
-	}
+	return (0);
 }

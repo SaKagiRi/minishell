@@ -15,10 +15,12 @@
 
 # include <unistd.h>
 # include <stdio.h>
+# include <stdbool.h>
 # include <stdlib.h>
 # include <signal.h>
-# include <readline/readline.h>
+# include <readline/readline.h> 
 # include <readline/history.h>
+# include "../process/process.h"
 
 extern volatile sig_atomic_t g_signal;
 

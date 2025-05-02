@@ -5,12 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: gyeepach <gyeepach@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/02 10:59:48 by gyeepach          #+#    #+#             */
-/*   Updated: 2025/05/02 11:28:07 by gyeepach         ###   ########.fr       */
+/*   Created: 2025/04/29 19:23:17 by knakto            #+#    #+#             */
+/*   Updated: 2025/05/02 14:05:16 by knakto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "parser.h"
 
 void	word_to_proc(t_word_struct **head, t_process **proc)
 {

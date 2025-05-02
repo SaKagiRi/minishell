@@ -1,24 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_env.c                                           :+:      :+:    :+:   */
+/*   get_t.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: knakto <knakto@student.42bangkok.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/15 03:38:45 by knakto            #+#    #+#             */
-/*   Updated: 2025/04/29 19:09:36 by knakto           ###   ########.fr       */
+/*   Created: 2025/04/12 20:21:47 by knakto            #+#    #+#             */
+/*   Updated: 2025/04/29 04:24:15 by knakto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtin.h"
+#include "process.h"
 
-void	ft_env(char **arg)
+t_process	**get_t_process(void)
 {
-	if (len_arg(arg) != 1)
-	{
-		pnf_fd(2, "bash: env: too many arguments\n");
-		exit(1);
-	}
-	print_env();
-	exit(0);
+	static t_process	*process = NULL;
+
+	return (&process);
 }

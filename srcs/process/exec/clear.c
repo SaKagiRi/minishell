@@ -1,24 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_env.c                                           :+:      :+:    :+:   */
+/*   clear.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: knakto <knakto@student.42bangkok.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/15 03:38:45 by knakto            #+#    #+#             */
-/*   Updated: 2025/04/29 19:09:36 by knakto           ###   ########.fr       */
+/*   Created: 2025/04/27 00:48:11 by knakto            #+#    #+#             */
+/*   Updated: 2025/04/27 01:35:34 by knakto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtin.h"
+#include "exec.h"
 
-void	ft_env(char **arg)
+void	clear_execution_failed(char **cmd, char **env)
 {
-	if (len_arg(arg) != 1)
-	{
-		pnf_fd(2, "bash: env: too many arguments\n");
-		exit(1);
-	}
-	print_env();
-	exit(0);
+	free_split(cmd);
 }

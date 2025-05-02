@@ -1,24 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_env.c                                           :+:      :+:    :+:   */
+/*   clear.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: knakto <knakto@student.42bangkok.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/15 03:38:45 by knakto            #+#    #+#             */
-/*   Updated: 2025/04/29 19:09:36 by knakto           ###   ########.fr       */
+/*   Created: 2025/04/12 19:40:54 by knakto            #+#    #+#             */
+/*   Updated: 2025/04/29 06:02:31 by knakto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtin.h"
+#include "process.h"
 
-void	ft_env(char **arg)
+void	clear_t_redirect(t_redirect *re)
 {
-	if (len_arg(arg) != 1)
+	t_redirect	*temp;
+
+	while (re)
 	{
-		pnf_fd(2, "bash: env: too many arguments\n");
-		exit(1);
+		free(re->value);
+		temp = re;
+		re = re->next;
+		free(temp);
 	}
-	print_env();
-	exit(0);
+}
+
+void	clear_t_process(void)
+{
+	t_process	*proc;
+	t_process	*temp;
+
+	proc = *get_t_process();
+	while (proc)
+	{
+		free_split(proc->cmd);
+		clear_t_redirect(proc->redirect);
+		temp = proc;
+		proc = proc->next;
+		free(temp);
+	}
+	*get_t_process() = NULL;
 }

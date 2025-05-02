@@ -6,11 +6,12 @@
 /*   By: gyeepach <gyeepach@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 06:05:55 by knakto            #+#    #+#             */
-/*   Updated: 2025/04/16 01:54:13 by knakto           ###   ########.fr       */
+/*   Updated: 2025/05/02 14:05:27 by knakto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+#include "../parser/parser.h"
 
 // t_msh	*get_shell(void)
 // {

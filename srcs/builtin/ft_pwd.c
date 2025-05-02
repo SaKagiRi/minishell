@@ -6,7 +6,7 @@
 /*   By: knakto <knakto@student.42bangkok.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 01:55:23 by knakto            #+#    #+#             */
-/*   Updated: 2025/04/15 04:18:31 by knakto           ###   ########.fr       */
+/*   Updated: 2025/04/29 19:09:57 by knakto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,10 @@ void	ft_pwd(char **arg)
 	if (len_arg(arg) != 1)
 	{
 		pnf_fd(2, "bash: pwd: too many arguments\n");
-		return ;
+		exit(1);
 	}
 	if (!getcwd(thispath, sizeof(thispath)))
-		return ;
+		exit(1);
 	pnf("%s\n", thispath);
+	exit(0);
 }
