@@ -1,40 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_malloc.c                                        :+:      :+:    :+:   */
+/*   clear.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: knakto <knakto@student.42bangkok.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/25 23:13:42 by knakto            #+#    #+#             */
-/*   Updated: 2025/04/26 01:13:09 by knakto           ###   ########.fr       */
+/*   Created: 2025/04/12 19:40:54 by knakto            #+#    #+#             */
+/*   Updated: 2025/04/29 06:02:31 by knakto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "memory.h"
+#include "process.h"
 
-static t_list	**get_t_list(void)
+void	clear_t_redirect(t_redirect *re)
 {
-	static t_list	*ls;
+	t_redirect	*temp;
 
-	return (&ls);
-}
-
-void	ft_free(void)
-{
-	ft_lstclear(get_t_list(), free);
-}
-
-void	*ft_malloc(size_t count, size_t size)
-{
-	void	*ptr;
-
-	ptr = ft_calloc(count, size);
-	if (!ptr)
+	while (re)
 	{
-		ft_free();
-		(void)write(2, "Error: ft_malloc allocation failed.\n", 36);
-		exit(EXIT_FAILURE);
+		free(re->value);
+		temp = re;
+		re = re->next;
+		free(temp);
 	}
-	ft_lstadd_back(get_t_list(), ft_lstnew(ptr));
-	return (ptr);
+}
+
+void	clear_t_process(void)
+{
+	t_process	*proc;
+	t_process	*temp;
+
+	proc = *get_t_process();
+	while (proc)
+	{
+		free_split(proc->cmd);
+		clear_t_redirect(proc->redirect);
+		temp = proc;
+		proc = proc->next;
+		free(temp);
+	}
+	*get_t_process() = NULL;
 }

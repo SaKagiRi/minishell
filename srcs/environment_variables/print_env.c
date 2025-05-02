@@ -1,40 +1,47 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_malloc.c                                        :+:      :+:    :+:   */
+/*   print_env.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: knakto <knakto@student.42bangkok.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/25 23:13:42 by knakto            #+#    #+#             */
-/*   Updated: 2025/04/26 01:13:09 by knakto           ###   ########.fr       */
+/*   Created: 2025/04/15 03:03:40 by knakto            #+#    #+#             */
+/*   Updated: 2025/04/15 05:29:58 by knakto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "memory.h"
+#include "env.h"
 
-static t_list	**get_t_list(void)
+void	print_env(void)
 {
-	static t_list	*ls;
+	int		i;
 
-	return (&ls);
+	i = 0;
+	while (env()[0][i])
+		pnf("%s\n", env()[0][i++]);
 }
 
-void	ft_free(void)
+static void	print(t_env	*env)
 {
-	ft_lstclear(get_t_list(), free);
-}
-
-void	*ft_malloc(size_t count, size_t size)
-{
-	void	*ptr;
-
-	ptr = ft_calloc(count, size);
-	if (!ptr)
+	if (env->value)
 	{
-		ft_free();
-		(void)write(2, "Error: ft_malloc allocation failed.\n", 36);
-		exit(EXIT_FAILURE);
+		if (!*env->value)
+			pnf("declare -x %s=\n", env->key);
+		else
+			pnf("declare -x %s=%s\n", env->key, env->value);
 	}
-	ft_lstadd_back(get_t_list(), ft_lstnew(ptr));
-	return (ptr);
+	else
+		pnf("declare -x %s\n", env->key);
+}
+
+void	print_env_list(void)
+{
+	t_env	*env;
+
+	env = *get_t_env();
+	while (env)
+	{
+		print(env);
+		env = env->next;
+	}
 }

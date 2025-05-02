@@ -1,27 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print.h                                            :+:      :+:    :+:   */
+/*   get_value_env.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: knakto <knakto@student.42bangkok.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/04 19:01:06 by knakto            #+#    #+#             */
-/*   Updated: 2025/04/11 04:24:09 by knakto           ###   ########.fr       */
+/*   Created: 2025/05/01 23:34:55 by knakto            #+#    #+#             */
+/*   Updated: 2025/05/01 23:43:29 by knakto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PRINT_H
-# define PRINT_H
+#include "env.h"
 
-# include <unistd.h>
-# include <stdarg.h>
+char	*get_value(char *key)
+{
+	char	*value;
+	t_env	*env;
 
-void	ft_putnbr_fd(int n, int fd);
-int		ft_putstr_fd(char *s, int fd);
-int		ft_putendl_fd(char *s, int fd);
-int		ft_putchar_fd(char c, int fd);
-int		pnf(const char *str, ...);
-int		pnf_fd(int fd, const char *str, ...);
-int		*get_fd(void);
-
-#endif
+	env =  *get_t_env();
+	if (!key || !search(key))
+		return (NULL);
+	while (env)
+	{
+		if (!ft_strncmp(key, env->key, ft_strlen(key)))
+			if (env->value)
+				return (ft_strdup(env->value));
+		env = env->next;
+	}
+	return (NULL);
+}

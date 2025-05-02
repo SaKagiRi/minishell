@@ -5,43 +5,39 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: knakto <knakto@student.42bangkok.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/08 20:45:27 by knakto            #+#    #+#             */
-/*   Updated: 2025/04/09 04:47:51 by knakto           ###   ########.fr       */
+/*   Created: 2025/04/15 02:22:59 by knakto            #+#    #+#             */
+/*   Updated: 2025/05/01 23:38:47 by knakto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ENV_H
 # define ENV_H
 
+# include <unistd.h>
+# include <stdlib.h>
 # include "../../lib/KML/include/kml.h"
-# include <stdbool.h>
+# include "../exit/exit.h"
 
 typedef struct s_env
 {
 	char			*key;
 	char			*value;
-	bool			env;
-	struct	s_env	*next;
+	struct s_env	*next;
 }	t_env;
 
-typedef	enum e_index_error
-{
-	NOT_INIT = 0,
-	NOT_FOUND = -1,
-	EMPTY_NODE = -2,
-	EMPTY_VALUE = -3,
-}	t_index_error;
-
-typedef enum e_env_mode
-{
-	EXPORT,
-	UNSET,
-	PRINT,
-}	t_env_mode;
-
-t_env	**get_t_env(void); //debug
-t_env	*env_new(char *key, char *value);
-void	init_clone_env(char **in_env);
+char	***env(void);
+t_env	**get_t_env(void);
+t_env	*new_env(char *key, char *value);
+void	init_env(char **env);
 void	print_env(void);
+void	print_env_list(void);
+void	set_env(void);
+void	add_env(char *key, char *value);
+int		search(char *key);
+void	del_env(char *key);
+void	set_value_env(char *key, char *value);
+void	del(t_env *d);
+void	clear_env(void);
+char	*get_value(char *key);
 
 #endif

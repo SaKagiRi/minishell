@@ -1,40 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_malloc.c                                        :+:      :+:    :+:   */
+/*   add_env.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: knakto <knakto@student.42bangkok.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/25 23:13:42 by knakto            #+#    #+#             */
-/*   Updated: 2025/04/26 01:13:09 by knakto           ###   ########.fr       */
+/*   Created: 2025/04/15 04:51:22 by knakto            #+#    #+#             */
+/*   Updated: 2025/04/15 05:14:44 by knakto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "memory.h"
+#include "env.h"
 
-static t_list	**get_t_list(void)
+int	search(char *key)
 {
-	static t_list	*ls;
+	t_env	*env;
 
-	return (&ls);
-}
-
-void	ft_free(void)
-{
-	ft_lstclear(get_t_list(), free);
-}
-
-void	*ft_malloc(size_t count, size_t size)
-{
-	void	*ptr;
-
-	ptr = ft_calloc(count, size);
-	if (!ptr)
+	env = *get_t_env();
+	while (env)
 	{
-		ft_free();
-		(void)write(2, "Error: ft_malloc allocation failed.\n", 36);
-		exit(EXIT_FAILURE);
+		if (!ft_strncmp(env->key, key, ft_strlen(key) + 1))
+			return (1);
+		env = env->next;
 	}
-	ft_lstadd_back(get_t_list(), ft_lstnew(ptr));
-	return (ptr);
+	return (0);
+}
+
+void	add_env(char *key, char *value)
+{
+	t_env	*env;
+
+	env = *get_t_env();
+	if (search(key))
+	{
+		set_value_env(key, value);
+		return ;
+	}
+	while (env->next)
+		env = env->next;
+	env->next = new_env(key, value);
+	set_env();
 }

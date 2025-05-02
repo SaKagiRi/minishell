@@ -1,18 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec.h                                             :+:      :+:    :+:   */
+/*   builtin_control.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: knakto <knakto@student.42bangkok.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/08 18:57:58 by knakto            #+#    #+#             */
-/*   Updated: 2025/04/08 18:58:59 by knakto           ###   ########.fr       */
+/*   Created: 2025/04/29 18:58:29 by knakto            #+#    #+#             */
+/*   Updated: 2025/04/29 19:00:04 by knakto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EXEC_H
-# define EXEC_H
+#include "process.h"
 
-void	pipex(void);
-
-#endif
+int	check_builtin(t_process *proc)
+{
+	if (!ft_strncmp(proc->cmd[0], "cd", 3) \
+		|| (!ft_strncmp(proc->cmd[0], "export", 7) && proc->cmd[1]) \
+		|| !ft_strncmp(proc->cmd[0], "unset", 6) \
+		|| !ft_strncmp(proc->cmd[0], "exit", 5))
+	{
+		builtin(proc);
+		return (1);
+	}
+	return (0);
+}

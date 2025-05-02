@@ -1,27 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print.h                                            :+:      :+:    :+:   */
+/*   clear_env.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: knakto <knakto@student.42bangkok.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/04 19:01:06 by knakto            #+#    #+#             */
-/*   Updated: 2025/04/11 04:24:09 by knakto           ###   ########.fr       */
+/*   Created: 2025/04/29 19:23:17 by knakto            #+#    #+#             */
+/*   Updated: 2025/04/29 19:27:37 by knakto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PRINT_H
-# define PRINT_H
+#include "env.h"
 
-# include <unistd.h>
-# include <stdarg.h>
-
-void	ft_putnbr_fd(int n, int fd);
-int		ft_putstr_fd(char *s, int fd);
-int		ft_putendl_fd(char *s, int fd);
-int		ft_putchar_fd(char c, int fd);
-int		pnf(const char *str, ...);
-int		pnf_fd(int fd, const char *str, ...);
-int		*get_fd(void);
-
-#endif
+void	clear_env(void)
+{
+	t_env	*envp;
+	t_env	*temp;
+	
+	envp = *get_t_env();
+	while (envp)
+	{
+		temp = envp;
+		envp = envp->next;
+		del(temp);
+	}
+	free_split(env()[0]);
+}

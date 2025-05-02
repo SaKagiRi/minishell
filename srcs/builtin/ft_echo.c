@@ -1,40 +1,49 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_malloc.c                                        :+:      :+:    :+:   */
+/*   ft_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: knakto <knakto@student.42bangkok.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/25 23:13:42 by knakto            #+#    #+#             */
-/*   Updated: 2025/04/26 01:13:09 by knakto           ###   ########.fr       */
+/*   Created: 2025/04/15 01:43:30 by knakto            #+#    #+#             */
+/*   Updated: 2025/04/29 19:08:29 by knakto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "memory.h"
+#include "builtin.h"
 
-static t_list	**get_t_list(void)
+static void	print_arg(char **arg)
 {
-	static t_list	*ls;
+	int		i;
 
-	return (&ls);
-}
-
-void	ft_free(void)
-{
-	ft_lstclear(get_t_list(), free);
-}
-
-void	*ft_malloc(size_t count, size_t size)
-{
-	void	*ptr;
-
-	ptr = ft_calloc(count, size);
-	if (!ptr)
+	i = 0;
+	while (arg[i])
 	{
-		ft_free();
-		(void)write(2, "Error: ft_malloc allocation failed.\n", 36);
-		exit(EXIT_FAILURE);
+		pnf("%s", arg[i]);
+		if (arg[i + 1])
+			pnf(" ");
+		i++;
 	}
-	ft_lstadd_back(get_t_list(), ft_lstnew(ptr));
-	return (ptr);
+}
+
+void	ft_echo(char **arg)
+{
+	if (len_arg(arg) == 1)
+		pnf("\n");
+	else if (len_arg(arg) > 2)
+	{
+		if (!ft_strncmp(arg[1], "-n", 3))
+			print_arg(&arg[2]);
+		else
+		{
+			print_arg(&arg[1]);
+			pnf("\n");
+		}
+	}
+	else
+	{
+		print_arg(&arg[1]);
+		pnf("\n");
+	}
+	exit(0);
 }

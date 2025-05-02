@@ -1,19 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_minishell.h                                   :+:      :+:    :+:   */
+/*   ft_env.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: knakto <knakto@student.42bangkok.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/06 06:02:42 by knakto            #+#    #+#             */
-/*   Updated: 2025/04/06 17:52:20 by knakto           ###   ########.fr       */
+/*   Created: 2025/04/15 03:38:45 by knakto            #+#    #+#             */
+/*   Updated: 2025/04/29 19:09:36 by knakto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef INIT_MINISHELL_H
-# define INIT_MINISHELL_H
+#include "builtin.h"
 
-void	init(int c, char **v, char **env);
-char	*get_user_name(void);
-
-#endif
+void	ft_env(char **arg)
+{
+	if (len_arg(arg) != 1)
+	{
+		pnf_fd(2, "bash: env: too many arguments\n");
+		exit(1);
+	}
+	print_env();
+	exit(0);
+}
