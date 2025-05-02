@@ -20,5 +20,6 @@
 # include "../srcs/environment_variables/env.h"
 # include "../srcs/execution/exec.h"
 # include "../srcs/exit/exit.h"
+# include "../srcs/parser/parser.h"
 
 #endif
