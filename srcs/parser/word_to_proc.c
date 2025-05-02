@@ -1,24 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   word_to_proc.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gyeepach <gyeepach@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/30 21:05:40 by knakto            #+#    #+#             */
-/*   Updated: 2025/04/16 01:17:16 by knakto           ###   ########.fr       */
+/*   Created: 2025/05/02 10:59:48 by gyeepach          #+#    #+#             */
+/*   Updated: 2025/05/02 11:28:07 by gyeepach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "../../include/minishell.h"
 
-# include <unistd.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include "../lib/KML/include/kml.h"
-# include "../srcs/environment_variables/env.h"
-# include "../srcs/execution/exec.h"
-# include "../srcs/exit/exit.h"
+void	word_to_proc(t_word_struct **head, t_process **proc)
+{
+	int	i;
 
-#endif
+	i = 0;
+	
+}
