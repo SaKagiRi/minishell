@@ -3,8 +3,10 @@ NAME		= minishell
 CC			= cc
 HEADER		= -I ./include -I $(LIBFT_DIR)/include
 #------------[FLAGS]
-CFLAGS		= $(DEBUG_FLAGS) $(W_FLAGS)
+CFLAGS		= $(DEBUG_FLAGS) $(W_FLAGS) $(ALL_DEBUG)
 DEBUG_FLAGS	= -g3 -lreadline
+ALL_DEBUG	= -D DEBUG_EXPAND=$(DEBUG_EXPAND)
+DEBUG_EXPAND= 1
 W_FLAGS		= #-Wall -Wextra -Werror
 #------------[LIBRARY]
 LIBFT_DIR	= ./lib/KML
@@ -13,7 +15,7 @@ LIBFT_FILE	= $(LIBFT_DIR)/kml.a
 SRC			= $(addprefix srcs/, $(FILE))
 OBJ			= $(SRC:.c=.o)
 #------------[ROOT_FILES]
-FILE		= $(MAIN) $(INIT) $(EXEC) $(PARSER) $(ENV) $(BUILTIN) $(EXIT) $(PROCESS)
+FILE		= $(MAIN) $(INIT) $(ENV) $(BUILTIN) $(EXIT) $(PROCESS) $(STUPID_PARSER)
 #------------[SUBFILES]
 #------------[MAIN]
 MAIN			= $(addprefix $(MAIN_PATH)/, $(MAIN_FILE))
@@ -24,7 +26,7 @@ PARSER			= $(addprefix $(PARSER_PATH)/, $(PARSER_FILE))
 PARSER_PATH		= parser
 PARSER_FILE		= extract.c extract_utils.c extract_utils2.c 
 #------------[PROCESSUTION]
-PROCESS			= $(addprefix $(PROCESS_PATH)/, $(PROCESS_FILE))
+PROCESS			= $(addprefix $(PROCESS_PATH)/, $(PROCESS_FILE)) $(EXEC)
 PROCESS_PATH		= process
 PROCESS_FILE		= heredoc.c redirect.c clear.c get_t.c process.c builtin_control.c
 	#------------[EXECUTION]
@@ -43,6 +45,18 @@ ENV_FILE		= get_t.c env_new.c init_env.c print_env.c set_env.c add_env.c del_env
 EXIT			= $(addprefix $(EXIT_PATH)/, $(EXIT_FILE))
 EXIT_PATH		= exit
 EXIT_FILE		= exit.c get_t.c
+#------------[STUPID_PARSER]
+STUPID_PARSER		= $(addprefix $(STUPID_PARSER_PATH)/, $(STUPID_PARSER_FILE)) $(SYNTAX) $(EXPAND)
+STUPID_PARSER_PATH	= stupid_parser
+STUPID_PARSER_FILE	= parser.c clear_t_pars.c get_t.c
+	#------------[SYNTAX]
+	SYNTAX				= $(addprefix $(SYNTAX_PATH)/, $(SYNTAX_FILE))
+	SYNTAX_PATH			= $(STUPID_PARSER_PATH)/syntax
+	SYNTAX_FILE			= check_quote.c check_pipe.c syntax.c check_redirect.c
+	#------------[EXPAND]
+	EXPAND				= $(addprefix $(EXPAND_PATH)/, $(EXPAND_FILE))
+	EXPAND_PATH			= $(STUPID_PARSER_PATH)/expand
+	EXPAND_FILE			= clear.c expand.c get_t.c expand_word.c check.c join_line.c
 #------------[PROCESS]
 all: lib $(NAME)
 $(NAME): $(OBJ) | $(BUILD_DIR)
