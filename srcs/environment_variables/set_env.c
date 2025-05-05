@@ -6,7 +6,7 @@
 /*   By: knakto <knakto@student.42bangkok.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 02:37:47 by knakto            #+#    #+#             */
-/*   Updated: 2025/04/15 05:55:00 by knakto           ###   ########.fr       */
+/*   Updated: 2025/05/05 07:32:15 by knakto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static void	temp_set_env(t_env *env_list, char ***temp, int *i)
 {
 	char	*block;
 
-	if (env_list->value)
+	if (env_list->value && env_list->key[0] != '$')
 	{
 		block = ft_strjoin(env_list->key, "=");
 		block = fjoin(block, env_list->value);

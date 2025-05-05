@@ -6,7 +6,7 @@
 /*   By: knakto <knakto@student.42bangkok.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 02:39:10 by knakto            #+#    #+#             */
-/*   Updated: 2025/04/15 05:42:56 by knakto           ###   ########.fr       */
+/*   Updated: 2025/05/05 07:37:31 by knakto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,11 @@ void	shell_level(void)
 	set_shell_level();
 }
 
+void	set_minishell_pid(void)
+{
+	*minishell_pid() = 112548;
+}
+
 void	init_env(char **env)
 {
 	int		i;
@@ -99,5 +104,6 @@ void	init_env(char **env)
 		i++;
 	}
 	shell_level();
+	set_minishell_pid();
 	set_env();
 }

@@ -6,7 +6,7 @@
 /*   By: knakto <knakto@student.42bangkok.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 23:34:55 by knakto            #+#    #+#             */
-/*   Updated: 2025/05/02 14:05:00 by knakto           ###   ########.fr       */
+/*   Updated: 2025/05/05 07:36:26 by knakto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,10 @@ char	*get_value(char *key)
 	t_env	*env;
 
 	env = *get_t_env();
+	if (key[0] == '$')
+		return (ft_itoa(*minishell_pid()));
 	if (!key || !search(key))
-		return (NULL);
+		return (ft_strdup(""));
 	while (env)
 	{
 		if (!ft_strncmp(key, env->key, ft_strlen(key)))
@@ -27,5 +29,5 @@ char	*get_value(char *key)
 				return (ft_strdup(env->value));
 		env = env->next;
 	}
-	return (NULL);
+	return (ft_strdup(""));
 }
