@@ -6,17 +6,16 @@
 /*   By: gyeepach <gyeepach@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 08:32:02 by gyeepach          #+#    #+#             */
-/*   Updated: 2025/05/01 20:48:26 by gyeepach         ###   ########.fr       */
+/*   Updated: 2025/05/05 21:26:48 by gyeepach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-
-char *extract_input_word(char *start, int len, t_word_type type)
+char	*extract_input_word(char *start, int len, t_word_type type)
 {
-	char *word;
-	
+	char	*word;
+
 	if (type == SINGLE_QUOTE || type == DOUBLE_QUOTE)
 	{
 		word = malloc(len - 1);
@@ -35,7 +34,8 @@ char *extract_input_word(char *start, int len, t_word_type type)
 	}
 	return (word);
 }
-t_word_type def_operator(char *str)
+
+t_word_type	def_operator(char *str)
 {
 	if (*str == '<' && *(str + 1) == '<')
 		return (HEREDOC);

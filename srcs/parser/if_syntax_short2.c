@@ -1,19 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   word_to_proc.c                                     :+:      :+:    :+:   */
+/*   if_syntax_short2.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gyeepach <gyeepach@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/29 19:23:17 by knakto            #+#    #+#             */
-/*   Updated: 2025/05/05 21:27:19 by gyeepach         ###   ########.fr       */
+/*   Created: 2025/05/05 22:01:34 by gyeepach          #+#    #+#             */
+/*   Updated: 2025/05/05 22:28:14 by gyeepach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "../../include/minishell.h"
 
-// void	word_to_proc(t_word_struct **head, t_process **proc)
-// {
-// 	int	i;
-// 	i = 0;
-// }
+bool	is_single_qoute(char *start, int valid_double)
+{
+	return (*start == '\'' && valid_double == 0);
+}
+
+bool	is_double_qoute(char *start, int valid_single)
+{
+	return (*start == '\"' && valid_single == 0);
+}
+
+bool	print_syntax_error(void)
+{
+	printf("syntax error\n");
+	return (false);
+}
