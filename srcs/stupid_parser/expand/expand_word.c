@@ -6,7 +6,7 @@
 /*   By: knakto <knakto@student.42bangkok.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 21:00:45 by knakto            #+#    #+#             */
-/*   Updated: 2025/05/05 23:51:50 by knakto           ###   ########.fr       */
+/*   Updated: 2025/05/07 14:34:27 by knakto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ int	len_expand(char *line)
 	i = 0;
 	if (!is_expand(line))
 		return (0);
-	if (line[1] == '\'')
+	if (line[1] == '\'' || line[1] == '"')
 		return (1);
-	if (line[1] == '$')
+	if (line[1] == '$' || line[1] == '?')
 		return (2);
 	while (line[i])
 	{
@@ -105,14 +105,13 @@ void	expand_word(char *line)
 			add_word(line, before, i - before);
 			before = i;
 			i += len_expand(&line[i]);
+			if (!line[i])
+				break ;
 			add_word(line, before, i - before);
 			before = i;
 		}
 		else if (is_in_s_quote(line[i]) && !ft_strchr(&line[i], '$'))
-		{
 			add_word(line, before, -1);
-			break ;
-		}
 		i++;
 	}
 	if (i - before > 1)

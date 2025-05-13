@@ -6,13 +6,16 @@
 /*   By: gyeepach <gyeepach@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 06:01:47 by knakto            #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2025/05/13 12:58:01 by knakto           ###   ########.fr       */
+=======
+/*   Updated: 2025/05/12 10:49:20 by knakto           ###   ########.fr       */
+>>>>>>> 233a0ea (feture: parser and fix get_calue)
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 // #include "../parser/parser.h"
-#include <c++/12/bits/chrono.h>
 #include <stdio.h>
 #include <readline/readline.h>
 #include <readline/history.h>
@@ -278,17 +281,18 @@ void	prompt(void)
 {
 	char	*line;
 
-	while (1)
+	while (is_exit(0))
 	{
 		line = readline("minishell> ");
 		if (!line)
 			break ;
-		s_parser(&line);
-		// add_history(line);
+		if (s_parser(&line))
+			process();
+		add_history(line);
 		free(line);
-		break ;
+		// break ;
 	}
-	// rl_clear_history();
+	rl_clear_history();
 }
 
 void	new_function_for_rebase(void)

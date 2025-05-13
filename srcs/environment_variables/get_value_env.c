@@ -6,7 +6,7 @@
 /*   By: knakto <knakto@student.42bangkok.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 23:34:55 by knakto            #+#    #+#             */
-/*   Updated: 2025/05/05 07:36:26 by knakto           ###   ########.fr       */
+/*   Updated: 2025/05/06 23:04:57 by knakto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ char	*get_value(char *key)
 	env = *get_t_env();
 	if (key[0] == '$')
 		return (ft_itoa(*minishell_pid()));
+	if (key[0] == '?')
+		return (ft_itoa(*get_code()));
 	if (!key || !search(key))
 		return (ft_strdup(""));
 	while (env)
