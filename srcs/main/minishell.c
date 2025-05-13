@@ -6,11 +6,7 @@
 /*   By: gyeepach <gyeepach@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 06:01:47 by knakto            #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2025/05/13 12:58:01 by knakto           ###   ########.fr       */
-=======
-/*   Updated: 2025/05/12 10:49:20 by knakto           ###   ########.fr       */
->>>>>>> 233a0ea (feture: parser and fix get_calue)
+/*   Updated: 2025/05/13 13:02:13 by knakto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -293,14 +289,6 @@ void	prompt(void)
 		// break ;
 	}
 	rl_clear_history();
-}
-
-void	new_function_for_rebase(void)
-{
-	char	*get_value;
-
-	get_value = "helo";
-	pnf("%s\n", get_value);
 }
 
 // NOTE: 
