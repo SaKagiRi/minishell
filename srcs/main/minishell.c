@@ -6,7 +6,7 @@
 /*   By: gyeepach <gyeepach@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 06:01:47 by knakto            #+#    #+#             */
-/*   Updated: 2025/05/02 13:14:07 by knakto           ###   ########.fr       */
+/*   Updated: 2025/05/13 12:39:21 by knakto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -270,6 +270,13 @@ void	get_line(void)
 		// ตามนี้
 		clear_word_list(word_struct);
 	}
+}
+
+void	test_something(void)
+{
+	char	*nothing;
+
+	nothing = "helo";
 }
 
 // NOTE: 
