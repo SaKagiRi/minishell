@@ -6,7 +6,11 @@
 /*   By: gyeepach <gyeepach@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 06:01:47 by knakto            #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2025/05/13 12:39:21 by knakto           ###   ########.fr       */
+=======
+/*   Updated: 2025/05/13 12:27:54 by knakto           ###   ########.fr       */
+>>>>>>> e025be8 (test: test rebase)
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -294,11 +298,8 @@ void	test_something(void)
 int	main(int c, char **v, char **envp)
 {
 
-	char	**cmd;
-
-	
 	// *env() = envp;
-	// init_env(envp);
+	init_env(envp);
 	// print_env();
 	// get_cmd("cd ..");
 	// get_line();
@@ -306,4 +307,5 @@ int	main(int c, char **v, char **envp)
 	// *get_t_process() = ft_new_proc(cmd, NULL);
 	// process();
 	// clear_t_process();
+	clear_env();
 }
