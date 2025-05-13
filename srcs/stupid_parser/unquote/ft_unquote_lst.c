@@ -1,34 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   clear_t_pars.c                                     :+:      :+:    :+:   */
+/*   ft_unquote_lst.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: knakto <knakto@student.42bangkok.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/05 03:12:18 by knakto            #+#    #+#             */
-/*   Updated: 2025/05/05 05:19:23 by knakto           ###   ########.fr       */
+/*   Created: 2025/05/11 12:01:32 by knakto            #+#    #+#             */
+/*   Updated: 2025/05/12 07:13:29 by knakto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "s_parser.h"
+#include "../s_parser.h"
 
-void	del_block(t_block *b)
+t_unquote	*new_uql(char *line, t_type type)
 {
-	free(b->content);
-}
+	t_unquote	*n;
 
-void	clear_t_block(void)
-{
-	t_block	*block;
-	t_block	*temp;
-
-	block = *get_t_block();
-	while (block)
-	{
-		temp = block;
-		block = block->next;
-		del_block(temp);
-		free(temp);
-	}
-	*get_t_block() = NULL;
+	n = malloc(sizeof(t_unquote));
+	if (!n)
+		return (NULL);
+	n->type = type;
+	n->content = line;
+	return (n);
 }

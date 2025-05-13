@@ -6,7 +6,7 @@
 /*   By: knakto <knakto@student.42bangkok.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/04 23:34:32 by knakto            #+#    #+#             */
-/*   Updated: 2025/05/06 00:02:18 by knakto           ###   ########.fr       */
+/*   Updated: 2025/05/12 07:24:19 by knakto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,29 +16,36 @@
 # include <stdbool.h>
 # include "syntax/syntax.h"
 # include "expand/expand.h"
+# include "../process/process.h"
+# include "export/export.h"
 
-typedef enum e_pars_type
+typedef enum e_type
 {
-	PIPE,
-	S_QUOTE,
-	D_QUOTE,
-	IN_S_QUOTE,
-	IN_D_QUOTE,
-	REDIRECT,
-	START_EXPAND,
-	EXPAND,
-	WORD,
-	CUT,
-}	t_pars_type;
+	T_PIPE,
+	T_REDIRECT,
+	T_READ,
+	T_WRITE,
+	T_APPEND,
+	T_HEREDOC,
+	T_CMD,
+}	t_type;
 
-typedef struct s_block
+typedef struct s_unquote
 {
-	char			*content;
-	t_pars_type		type;
-	struct s_block	*next;
-}	t_block;
+	t_type	type;
+	char	*content;
+}	t_unquote;
 
-t_block	**get_t_block(void);
-bool	s_parser(char **line);
+bool		s_parser(char **line);
+t_list		*cut_word(char *line);
+t_list		*unquote(t_list *split);
+void		debug_parser(t_list *cut_lst, t_list *unquote_lst, char *line);
+void		clear_pars(t_list *c, t_list *u);
+int			is_redirect(char *s);
+t_type		check_type(char *line);
+t_type		check_type_redirect(char *s1, char *s2);
+t_unquote	*new_uql(char *line, t_type type);
+void		clear_t_unquote(void *u);
+void		print_debug_unquote(t_list *w, t_list *c, char *line);
 
 #endif

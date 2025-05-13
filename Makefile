@@ -5,8 +5,11 @@ HEADER		= -I ./include -I $(LIBFT_DIR)/include
 #------------[FLAGS]
 CFLAGS		= $(DEBUG_FLAGS) $(W_FLAGS) $(ALL_DEBUG)
 DEBUG_FLAGS	= -g3 -lreadline
-ALL_DEBUG	= -D DEBUG_EXPAND=$(DEBUG_EXPAND)
-DEBUG_EXPAND= 1
+ALL_DEBUG	= -D DEBUG_EXPAND=$(DEBUG_EXPAND) -D DEBUG_CUT_WORD=$(DEBUG_CUT_WORD) -D DEBUG_UNQUOTE=$(DEBUG_UNQUOTE) -D DEBUG_PROCESS=$(DEBUG_PROCESS)
+DEBUG_EXPAND	= 1
+DEBUG_CUT_WORD	= 1
+DEBUG_UNQUOTE	= 1
+DEBUG_PROCESS	= 1
 W_FLAGS		= #-Wall -Wextra -Werror
 #------------[LIBRARY]
 LIBFT_DIR	= ./lib/KML
@@ -46,9 +49,9 @@ EXIT			= $(addprefix $(EXIT_PATH)/, $(EXIT_FILE))
 EXIT_PATH		= exit
 EXIT_FILE		= exit.c get_t.c
 #------------[STUPID_PARSER]
-STUPID_PARSER		= $(addprefix $(STUPID_PARSER_PATH)/, $(STUPID_PARSER_FILE)) $(SYNTAX) $(EXPAND)
+STUPID_PARSER		= $(addprefix $(STUPID_PARSER_PATH)/, $(STUPID_PARSER_FILE)) $(SYNTAX) $(EXPAND) $(UNQUOTE) $(EXPORT_TO_EXEC)
 STUPID_PARSER_PATH	= stupid_parser
-STUPID_PARSER_FILE	= parser.c clear_t_pars.c get_t.c
+STUPID_PARSER_FILE	= parser.c cut_word.c clear.c debug.c
 	#------------[SYNTAX]
 	SYNTAX				= $(addprefix $(SYNTAX_PATH)/, $(SYNTAX_FILE))
 	SYNTAX_PATH			= $(STUPID_PARSER_PATH)/syntax
@@ -57,6 +60,14 @@ STUPID_PARSER_FILE	= parser.c clear_t_pars.c get_t.c
 	EXPAND				= $(addprefix $(EXPAND_PATH)/, $(EXPAND_FILE))
 	EXPAND_PATH			= $(STUPID_PARSER_PATH)/expand
 	EXPAND_FILE			= clear.c expand.c get_t.c expand_word.c check.c join_line.c
+	#------------[UNQUOTE]
+	UNQUOTE				= $(addprefix $(UNQUOTE_PATH)/, $(UNQUOTE_FILE))
+	UNQUOTE_PATH			= $(STUPID_PARSER_PATH)/unquote
+	UNQUOTE_FILE			= checktype.c ft_unquote_lst.c unquote.c debug.c
+	#------------[EXPORT_TO_EXEC]
+	EXPORT_TO_EXEC				= $(addprefix $(EXPORT_TO_EXEC_PATH)/, $(EXPORT_TO_EXEC_FILE))
+	EXPORT_TO_EXEC_PATH			= $(STUPID_PARSER_PATH)/export
+	EXPORT_TO_EXEC_FILE			= debug.c export_to_execute.c new_list.c
 #------------[PROCESS]
 all: lib $(NAME)
 $(NAME): $(OBJ) | $(BUILD_DIR)

@@ -6,7 +6,7 @@
 /*   By: knakto <knakto@student.42bangkok.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 22:44:41 by knakto            #+#    #+#             */
-/*   Updated: 2025/05/05 22:45:07 by knakto           ###   ########.fr       */
+/*   Updated: 2025/05/12 10:52:24 by knakto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ bool	is_in_s_quote(char c)
 bool	is_expand(char *line)
 {
 	if (!is_in_s_quote(line[0]) && line[0] == '$' && (ft_isalpha(line[1]) \
-|| line[1] == '\'' || line[1] == '$' || line[1] == '_'))
+|| line[1] == '\'' || line[1] == '"' || line[1] == '$' || line[1] == '_' || \
+line[1] == '?'))
 		return (true);
 	return (false);
 }

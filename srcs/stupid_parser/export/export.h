@@ -1,22 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit.h                                             :+:      :+:    :+:   */
+/*   export.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: knakto <knakto@student.42bangkok.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/16 01:15:16 by knakto            #+#    #+#             */
-/*   Updated: 2025/05/06 23:10:24 by knakto           ###   ########.fr       */
+/*   Created: 2025/05/12 06:41:10 by knakto            #+#    #+#             */
+/*   Updated: 2025/05/12 07:27:27 by knakto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EXIT_H
-# define EXIT_H
+#ifndef EXPORT_H
+# define EXPORT_H
 
-# include <stdbool.h>
-# include <stdlib.h>
+# include "../../process/process.h"
 
-int		*get_code(void);
-bool	is_exit(int num);
+t_redirect	*new_redirect(char *value, t_redirect_type type);
+t_process	*new_proc(char **cmd, t_redirect *re);
+void		redirect_add_back(t_redirect **re, char *value,\
+ t_redirect_type type);
+void		proc_add_back(t_process **proc, char **cmd, t_redirect *re);
+void		export_to_execute(t_list *u);
+void		print_debug_process(void);
 
 #endif

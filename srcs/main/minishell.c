@@ -6,13 +6,12 @@
 /*   By: gyeepach <gyeepach@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 06:01:47 by knakto            #+#    #+#             */
-/*   Updated: 2025/05/06 00:23:07 by knakto           ###   ########.fr       */
+/*   Updated: 2025/05/12 10:49:20 by knakto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 // #include "../parser/parser.h"
-#include <c++/12/bits/chrono.h>
 #include <stdio.h>
 #include <readline/readline.h>
 #include <readline/history.h>
@@ -278,17 +277,18 @@ void	prompt(void)
 {
 	char	*line;
 
-	while (1)
+	while (is_exit(0))
 	{
 		line = readline("minishell> ");
 		if (!line)
 			break ;
-		s_parser(&line);
-		// add_history(line);
+		if (s_parser(&line))
+			process();
+		add_history(line);
 		free(line);
-		break ;
+		// break ;
 	}
-	// rl_clear_history();
+	rl_clear_history();
 }
 
 // NOTE: 
