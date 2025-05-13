@@ -6,7 +6,7 @@
 /*   By: knakto <knakto@student.42bangkok.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 01:24:26 by knakto            #+#    #+#             */
-/*   Updated: 2025/04/29 04:23:53 by knakto           ###   ########.fr       */
+/*   Updated: 2025/05/04 23:26:15 by knakto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	ft_heredoc(t_redirect *redirect)
 	while (line)
 	{
 		if (!ft_strncmp(redirect->value, line, ft_strlen(redirect->value)) \
-			&& ft_strlen(line) - 1 == ft_strlen(redirect->value))
+&& ft_strlen(line) - 1 == ft_strlen(redirect->value))
 		{
 			end_heredoc(redirect, name_file, fd);
 			free(line);

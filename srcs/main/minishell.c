@@ -6,7 +6,15 @@
 /*   By: gyeepach <gyeepach@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 06:01:47 by knakto            #+#    #+#             */
-/*   Updated: 2025/05/02 13:14:07 by knakto           ###   ########.fr       */
+<<<<<<< HEAD
+<<<<<<< HEAD
+/*   Updated: 2025/05/13 12:39:21 by knakto           ###   ########.fr       */
+=======
+/*   Updated: 2025/05/13 12:27:54 by knakto           ###   ########.fr       */
+>>>>>>> e025be8 (test: test rebase)
+=======
+/*   Updated: 2025/05/13 12:33:56 by knakto           ###   ########.fr       */
+>>>>>>> 73a51c0 (test: test rebase)
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -272,6 +280,14 @@ void	get_line(void)
 	}
 }
 
+void	new_function_for_rebase(void)
+{
+	char	*get_value;
+
+	get_value = "helo";
+	pnf("%s\n", get_value);
+}
+
 // NOTE: 
 // -sort export, export unset in other case
 // -error case
@@ -287,11 +303,8 @@ void	get_line(void)
 int	main(int c, char **v, char **envp)
 {
 
-	char	**cmd;
-
-	
 	// *env() = envp;
-	// init_env(envp);
+	init_env(envp);
 	// print_env();
 	// get_cmd("cd ..");
 	// get_line();
@@ -299,4 +312,5 @@ int	main(int c, char **v, char **envp)
 	// *get_t_process() = ft_new_proc(cmd, NULL);
 	// process();
 	// clear_t_process();
+	clear_env();
 }
