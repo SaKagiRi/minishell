@@ -7,10 +7,14 @@
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 06:01:47 by knakto            #+#    #+#             */
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*   Updated: 2025/05/13 12:39:21 by knakto           ###   ########.fr       */
 =======
 /*   Updated: 2025/05/13 12:27:54 by knakto           ###   ########.fr       */
 >>>>>>> e025be8 (test: test rebase)
+=======
+/*   Updated: 2025/05/13 12:33:56 by knakto           ###   ########.fr       */
+>>>>>>> 73a51c0 (test: test rebase)
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -276,11 +280,20 @@ void	get_line(void)
 	}
 }
 
+<<<<<<< HEAD
 void	test_something(void)
 {
 	char	*nothing;
 
 	nothing = "helo";
+=======
+void	new_function_for_rebase(void)
+{
+	char	*get_value;
+
+	get_value = "helo";
+	pnf("%s\n", get_value);
+>>>>>>> 73a51c0 (test: test rebase)
 }
 
 // NOTE: 
