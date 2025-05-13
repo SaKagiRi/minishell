@@ -1,22 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit.h                                             :+:      :+:    :+:   */
+/*   syntax.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: knakto <knakto@student.42bangkok.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/16 01:15:16 by knakto            #+#    #+#             */
-/*   Updated: 2025/05/06 23:10:24 by knakto           ###   ########.fr       */
+/*   Created: 2025/05/05 00:28:58 by knakto            #+#    #+#             */
+/*   Updated: 2025/05/05 02:22:36 by knakto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EXIT_H
-# define EXIT_H
+#include "syntax.h"
 
-# include <stdbool.h>
-# include <stdlib.h>
+bool	syntax(char *line)
+{
+	bool	status;
 
-int		*get_code(void);
-bool	is_exit(int num);
-
-#endif
+	status = false;
+	if (!check_quote(line) || !check_redirect(line))
+		status = true;
+	return (!status);
+}

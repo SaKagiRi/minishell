@@ -6,7 +6,7 @@
 /*   By: knakto <knakto@student.42bangkok.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 00:37:28 by knakto            #+#    #+#             */
-/*   Updated: 2025/05/04 23:18:47 by knakto           ###   ########.fr       */
+/*   Updated: 2025/05/12 10:43:57 by knakto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,6 @@ static void	ft_wait_proc(int all_proc, pid_t last_pid)
 	while (i < all_proc)
 	{
 		temp_pid = wait(&temp_code);
-		pnf("pid: %d, %d\n", temp_pid, last_pid);
-		pnf("code: %d\n", temp_code / 256);
 		if (temp_pid == last_pid)
 			*get_code() = temp_code / 256;
 		i++;

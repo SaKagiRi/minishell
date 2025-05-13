@@ -6,7 +6,7 @@
 /*   By: knakto <knakto@student.42bangkok.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 01:14:47 by knakto            #+#    #+#             */
-/*   Updated: 2025/04/26 21:42:30 by knakto           ###   ########.fr       */
+/*   Updated: 2025/05/06 23:11:01 by knakto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,4 @@ bool	is_exit(int num)
 		return (!*ext());
 	*ext() = num;
 	return (!*ext());
-}
-
-void	set_exit(int num)
-{
-	if (num == -1)
-		exit(EXIT_FAILURE);
-	*get_code() = num;
-	exit(*get_code());
 }

@@ -1,22 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit.h                                             :+:      :+:    :+:   */
+/*   syntax.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: knakto <knakto@student.42bangkok.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/16 01:15:16 by knakto            #+#    #+#             */
-/*   Updated: 2025/05/06 23:10:24 by knakto           ###   ########.fr       */
+/*   Created: 2025/05/05 00:01:29 by knakto            #+#    #+#             */
+/*   Updated: 2025/05/05 01:54:48 by knakto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EXIT_H
-# define EXIT_H
+#ifndef SYNTAX_H
+# define SYNTAX_H
 
+# include "../../../lib/KML/include/kml.h"
 # include <stdbool.h>
-# include <stdlib.h>
 
-int		*get_code(void);
-bool	is_exit(int num);
+bool	check_pipe(char *line, int len);
+bool	check_quote(char *line);
+bool	syntax(char *line);
+bool	check_redirect(char *line);
 
 #endif

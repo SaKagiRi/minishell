@@ -6,7 +6,7 @@
 /*   By: gyeepach <gyeepach@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 06:05:55 by knakto            #+#    #+#             */
-/*   Updated: 2025/05/02 14:05:27 by knakto           ###   ########.fr       */
+/*   Updated: 2025/05/05 03:48:23 by knakto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@
 // 	return (&shell);
 // }
 
-t_word_type	sing_or_double(char *start)
-{
-	if (*start == '\'')
-		return (SINGLE_QUOTE);
-	else
-		return (DOUBLE_QUOTE);
-}
+// t_word_type	sing_or_double(char *start)
+// {
+// 	if (*start == '\'')
+// 		return (SINGLE_QUOTE);
+// 	else
+// 		return (DOUBLE_QUOTE);
+// }

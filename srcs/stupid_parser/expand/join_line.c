@@ -1,35 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_value_env.c                                    :+:      :+:    :+:   */
+/*   join_line.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: knakto <knakto@student.42bangkok.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/01 23:34:55 by knakto            #+#    #+#             */
-/*   Updated: 2025/05/06 23:04:57 by knakto           ###   ########.fr       */
+/*   Created: 2025/05/05 23:52:34 by knakto            #+#    #+#             */
+/*   Updated: 2025/05/05 23:55:02 by knakto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "env.h"
+#include "expand.h"
 
-char	*get_value(char *key)
+char	*join_line(void)
 {
-	char	*value;
-	t_env	*env;
+	char	*temp;
+	t_word	*word;
 
-	env = *get_t_env();
-	if (key[0] == '$')
-		return (ft_itoa(*minishell_pid()));
-	if (key[0] == '?')
-		return (ft_itoa(*get_code()));
-	if (!key || !search(key))
-		return (ft_strdup(""));
-	while (env)
+	if (!*get_t_word())
+		return (NULL);
+	temp = ft_strdup("");
+	word = *get_t_word();
+	while (word)
 	{
-		if (!ft_strncmp(key, env->key, ft_strlen(key)))
-			if (env->value)
-				return (ft_strdup(env->value));
-		env = env->next;
+		if (word->expand)
+			temp = fjoin(temp, word->expand);
+		else
+			temp = fjoin(temp, word->word);
+		word = word->next;
 	}
-	return (ft_strdup(""));
+	return (temp);
 }

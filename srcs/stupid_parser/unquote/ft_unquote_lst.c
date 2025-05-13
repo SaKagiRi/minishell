@@ -1,22 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit.h                                             :+:      :+:    :+:   */
+/*   ft_unquote_lst.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: knakto <knakto@student.42bangkok.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/16 01:15:16 by knakto            #+#    #+#             */
-/*   Updated: 2025/05/06 23:10:24 by knakto           ###   ########.fr       */
+/*   Created: 2025/05/11 12:01:32 by knakto            #+#    #+#             */
+/*   Updated: 2025/05/12 07:13:29 by knakto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EXIT_H
-# define EXIT_H
+#include "../s_parser.h"
 
-# include <stdbool.h>
-# include <stdlib.h>
+t_unquote	*new_uql(char *line, t_type type)
+{
+	t_unquote	*n;
 
-int		*get_code(void);
-bool	is_exit(int num);
-
-#endif
+	n = malloc(sizeof(t_unquote));
+	if (!n)
+		return (NULL);
+	n->type = type;
+	n->content = line;
+	return (n);
+}

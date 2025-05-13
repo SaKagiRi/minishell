@@ -1,22 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit.h                                             :+:      :+:    :+:   */
+/*   get_t.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: knakto <knakto@student.42bangkok.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/16 01:15:16 by knakto            #+#    #+#             */
-/*   Updated: 2025/05/06 23:10:24 by knakto           ###   ########.fr       */
+/*   Created: 2025/05/05 04:30:39 by knakto            #+#    #+#             */
+/*   Updated: 2025/05/05 21:00:24 by knakto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EXIT_H
-# define EXIT_H
+#include "expand.h"
 
-# include <stdbool.h>
-# include <stdlib.h>
+t_word	**get_t_word(void)
+{
+	static t_word	*word;
 
-int		*get_code(void);
-bool	is_exit(int num);
-
-#endif
+	return (&word);
+}
