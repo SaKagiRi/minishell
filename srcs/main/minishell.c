@@ -291,6 +291,14 @@ void	prompt(void)
 	rl_clear_history();
 }
 
+void	new_function_for_rebase(void)
+{
+	char	*get_value;
+
+	get_value = "helo";
+	pnf("%s\n", get_value);
+}
+
 // NOTE: 
 // -sort export, export unset in other case
 // -error case
@@ -305,10 +313,6 @@ void	prompt(void)
 // NOTE: 
 int	main(int c, char **v, char **envp)
 {
-	char	*line;
-	char	**cmd;
-
-	
 	// *env() = envp;
 	init_env(envp);
 	// print_env();
