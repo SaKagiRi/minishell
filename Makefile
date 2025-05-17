@@ -18,7 +18,7 @@ FILE		= $(MAIN) $(INIT) $(EXEC) $(PARSER) $(ENV) $(BUILTIN) $(EXIT)
 #------------[MAIN]
 MAIN			= $(addprefix $(MAIN_PATH)/, $(MAIN_FILE))
 MAIN_PATH		= main
-MAIN_FILE		= minishell.c get_t.c signal_bind.c
+MAIN_FILE		= minishell.c # get_t.c signal_bind.c
 #------------[EXECUTION]
 EXEC			= $(addprefix $(EXEC_PATH)/, $(EXEC_FILE))
 EXEC_PATH		= execution
@@ -26,7 +26,7 @@ EXEC_FILE		= exec.c heredoc.c redirect.c clear.c get_t.c process.c
 #------------[PARSER]
 PARSER			= $(addprefix $(PARSER_PATH)/, $(PARSER_FILE))
 PARSER_PATH		= parser
-PARSER_FILE		= extract.c extract_utils.c extract_utils2.c
+PARSER_FILE		= extract.c extract_utils.c extract_utils2.c extract_utils3.c if_syntax_short.c if_syntax_short2.c expansion.c
 #------------[BUILTIN]
 BUILTIN			= $(addprefix $(BUILTIN_PATH)/, $(BUILTIN_FILE))
 BUILTIN_PATH	= builtin

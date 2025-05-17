@@ -6,11 +6,19 @@
 /*   By: gyeepach <gyeepach@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 17:11:02 by gyeepach          #+#    #+#             */
-/*   Updated: 2025/05/05 22:27:53 by gyeepach         ###   ########.fr       */
+/*   Updated: 2025/05/12 21:58:21 by gyeepach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+
+t_word_type	sing_or_double(char *start)
+{
+	if (*start == '\'')
+		return (SINGLE_QUOTE);
+	else
+		return (DOUBLE_QUOTE);
+}
 
 t_word_type	get_word_type(char *start)
 {
@@ -48,7 +56,7 @@ bool	syntax_check(char *line)
 			return (valid_rdir(start, line));
 		if (is_single_qoute(start, valid_double))
 			valid_single = !valid_single;
-		else if (is_double_qoute(start, valid_single))
+		if (is_double_qoute(start, valid_single))
 			valid_double = !valid_double;
 		start++;
 	}
@@ -75,7 +83,7 @@ int	word_len_inquote(char *start, t_word_type type)
 
 	word_len = 0;
 	end = start + 1;
-	if (type == SINGLE_MATCH)
+	if (type == SINGLE_QUOTE)
 	{
 		while (*end && *end != '\'')
 			end++;

@@ -1,42 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   clear.c                                            :+:      :+:    :+:   */
+/*   put_in_exec.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gyeepach <gyeepach@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/12 19:40:54 by knakto            #+#    #+#             */
-/*   Updated: 2025/05/11 13:50:13 by gyeepach         ###   ########.fr       */
+/*   Created: 2025/05/17 15:27:29 by gyeepach          #+#    #+#             */
+/*   Updated: 2025/05/17 17:24:29 by gyeepach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "exec.h"
+#include "../../include/minishell.h"
 
-void	clear_t_redirect(t_redirect *re)
+void	word_to_proc()
 {
-	t_redirect	*temp;
-
-	while (re)
-	{
-		free(re->value);
-		temp = re;
-		re = re->next;
-		free(temp);
-	}
-}
-
-void	clear_t_process(void)
-{
-	t_process	*proc;
-	t_process	*temp;
-
-	proc = *get_t_process();
-	while (proc)
-	{
-		free_split(proc->cmd);
-		clear_t_redirect(proc->redirect);
-		temp = proc;
-		proc = proc->next;
-		free(temp);
-	}
+	
 }

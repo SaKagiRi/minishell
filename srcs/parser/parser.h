@@ -6,7 +6,7 @@
 /*   By: gyeepach <gyeepach@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 22:01:45 by gyeepach          #+#    #+#             */
-/*   Updated: 2025/05/05 22:28:48 by gyeepach         ###   ########.fr       */
+/*   Updated: 2025/05/12 21:43:28 by gyeepach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@
 # include <signal.h>
 # include <readline/readline.h> 
 # include <readline/history.h>
-# include "../process/process.h"
+// # include "../include/minishell.h"
+// # include "../process/process.h"
 
 extern volatile sig_atomic_t	g_signal;
 
@@ -83,5 +84,7 @@ bool			is_single_qoute(char *start, int valid_double);
 bool			is_double_qoute(char *start, int valid_single);
 bool			quote_not_close(int valid_single, int valid_double);
 bool			print_syntax_error(void);
+void			list_word_expansion(t_word_struct **head);
+char 			*find_env_value(char *key);
 
 #endif

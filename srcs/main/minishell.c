@@ -6,7 +6,7 @@
 /*   By: gyeepach <gyeepach@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 06:01:47 by knakto            #+#    #+#             */
-/*   Updated: 2025/05/02 13:12:26 by gyeepach         ###   ########.fr       */
+/*   Updated: 2025/05/12 21:59:15 by gyeepach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -246,6 +246,7 @@ void	get_line(void)
 		//Debug_syntax print
 		printf("syntax is correct\n");
 		string_extraction(line, &word_struct);
+		list_word_expansion(&word_struct);
 		// word_to_process(&word_struct, &process);
 		//Debug_string_extraction print
 		printf("===== Token List =====\n");
@@ -291,12 +292,12 @@ int	main(int c, char **v, char **envp)
 
 	
 	// *env() = envp;
-	// init_env(envp);
+	init_env(envp);
 	// print_env();
 	// get_cmd("cd ..");
-	// get_line();
-	cmd = ft_split("ls", ' ');
-	*get_t_process() = ft_new_proc(cmd, NULL);
-	process();
+	get_line();
+	// cmd = ft_split("ls", ' '); // ตรงนี้ควร uncomment
+	// *get_t_process() = ft_new_proc(cmd, NULL); // ตรงนี้ควร uncomment
+	// process(); // ตรงนี้ควร uncomment
 	// clear_t_process();
 }

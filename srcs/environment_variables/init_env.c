@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   init_env.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: knakto <knakto@student.42bangkok.com>      +#+  +:+       +#+        */
+/*   By: gyeepach <gyeepach@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 02:39:10 by knakto            #+#    #+#             */
-/*   Updated: 2025/04/15 05:42:56 by knakto           ###   ########.fr       */
+/*   Updated: 2025/05/11 14:42:11 by gyeepach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "env.h"
 
-static t_env	*get_node(char **env, int i)
+static t_env	* get_node(char **env, int i)
 {
 	char	**temp;
 	char	*temp_1;

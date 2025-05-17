@@ -7,6 +7,9 @@
 		"kml.h": "c",
 		"readline.h": "c",
 		"stdlib.h": "c",
-		"strings.h": "c"
+		"strings.h": "c",
+		"exit.h": "c",
+		"parser.h": "c",
+		"exec.h": "c"
 	}
 }
